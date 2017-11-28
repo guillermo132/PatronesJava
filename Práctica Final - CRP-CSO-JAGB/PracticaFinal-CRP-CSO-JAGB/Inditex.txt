@@ -1,0 +1,40 @@
+----------------------FACTURA----------------------
+
+
+
+
+COMPAÑÍA: Inditex
+
+
+OFICINA ASOCIADA: Inditex
+
+
+DIRECCIÓN: localidad: Madrid
+Avenida, NÂº 3, Piso 3Letra: a,
+CP 1222.
+
+
+Tlf: 123123
+
+
+OCUPACIÓN: Aeropuerto
+
+
+JORNADA: Completa
+
+
+SALARIO MÍNIMO: 1000.0
+
+
+SALARIA MÁXIMO: 100000.0
+
+
+FECHA INICIO OFERTA: Thu Jan 14 09:31:27 CET 2016
+
+
+FECHA CIERRE OFERTA: Fri Jan 15 00:00:00 CET 2016
+
+
+PALABRAS CLAVES: Avion,
+
+

@@ -1,0 +1,40 @@
+----------------------FACTURA----------------------
+
+
+
+
+COMPAÑÍA: Everis
+
+
+OFICINA ASOCIADA: asdfdasf
+
+
+DIRECCIÓN: localidad: dfghdy
+sdfgertg, NÂº 3, Piso 2Letra: s,
+CP 342.
+
+
+Tlf: 234235
+
+
+OCUPACIÓN: Aeropuerto
+
+
+JORNADA: Completa
+
+
+SALARIO MÍNIMO: 1000.0
+
+
+SALARIA MÁXIMO: 2000.0
+
+
+FECHA INICIO OFERTA: Thu Jan 14 13:22:21 CET 2016
+
+
+FECHA CIERRE OFERTA: Thu Jan 14 13:22:21 CET 2016
+
+
+PALABRAS CLAVES: avion,
+
+

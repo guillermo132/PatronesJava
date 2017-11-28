@@ -1,0 +1,99 @@
+Administrativo
+Aereospacial
+Aeropuerto
+Agricultura
+Almacén
+Ambiente
+Arquitectura
+Automotor
+Aviación
+Bancos/operaciones bancarias
+Belleza/Cosmética
+Biotech
+Ciencia/Tecnología
+Comercialización
+Comprar
+Computación Gráfica/Animación
+Computadora/Computer
+Construcción
+Consultor/Consulta
+Contabilidad/Auditoría
+Control de Calidad
+Costes de la Edificación
+Cuidado de niños/Nanny
+Deportes
+Desarrollo de Software
+Diseño Web/Desing
+Diseño/Multimedia
+Distribución
+Doctor en Medicina
+Ecología/Conservación
+Educación
+Electrónica
+Energía
+Enfermería/Enfermera
+Enseñanza/Profesor
+Entertainment
+Especialista/Experto
+Explotación Minera
+Fabricación
+Farmacéutico
+Finanzas
+Geociencia
+Gerencia/Dirección
+Gobierno
+Hospitalidad
+Hotel/Hoteles
+Idiomas/Multilingüe
+Impuesto
+Independiente
+Industria Del Gas
+Industria del Petróleo
+Industrial
+Ingeniería/de Ingeniero
+Inmobiliaria/Agente inmobiliario
+Instalación
+Investigación/Desarrollo
+Juego
+Leyes/Legales
+Logística
+Mantenimiento
+Mecánicos
+Media/Artes audiovisuales
+Moda
+Non Profit
+Peluquería/Peluquero
+Producción
+Profesor de español/profesora
+Programador
+Práctica/Entrenamiento
+Publicar
+Publicidad
+Reclutamiento/Seleccion
+Restaurant/Gastronomía
+Secretaria
+Sector Público
+Seguridad
+Seguro
+Servicio Al Cliente
+Servicios Médicos
+Soporte Tecnico/Helpdesk
+Tecnología De Información
+Telecomunicaciones
+Telesales/Telemarketing
+Televisión/Radio/Difusión
+Trabajador Cualificado
+Trabajador Social
+Traducción
+Transformación De los Alimentos
+Transporte
+Turismo
+Técnico de Laboratorio
+Venta al por menor/mayor
+Ventas
+Verano
+Viajes/Agente de Viajes
+Voluntario
+Web/Internet
+al Aire libre/Aventura
+de Odontología/Dentista odontologo
