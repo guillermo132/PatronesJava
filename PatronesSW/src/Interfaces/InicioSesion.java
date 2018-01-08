@@ -6,6 +6,7 @@
 package Interfaces;
 
 import Clases.*;
+import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -138,9 +139,6 @@ public class InicioSesion extends javax.swing.JFrame {
                     if(tablaUsuarios.containsKey(usuario)){
                         //Instanciamos un cliente recogiendo su usuario y recogiendo su contraseña de la clase Cliente
                         Usuario c = tablaUsuarios.get(usuario);
-                        System.out.println("user: "+tablaUsuarios.get(usuario).getNombreUsuario());
-                        System.out.println("pass hash: "+tablaUsuarios.get(usuario).getClave());
-                        System.out.println("pass: "+password);
                         String contrasena=c.getClave();
                         //Si la contraseña de la clase Cliente y la introducida son iguales, accedemos a la aplicación
                         if (contrasena.equals(password)){
@@ -156,7 +154,7 @@ public class InicioSesion extends javax.swing.JFrame {
                     }//fin del if
                     System.out.println("pass: "+password);
                 }//fin del try
-                catch (Exception e){
+                catch (HeadlessException e){
                     System.err.println(e);
                     JOptionPane.showMessageDialog(this, "USUARIO NO ENCONTRADO");
                 }
