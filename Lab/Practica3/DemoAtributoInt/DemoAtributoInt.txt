@@ -1,1 +1,0 @@
-En este ejemplo se puede ver la utilización de una interface como atributo de una clase para permitir la asignación de un DNI (int) o NIF (String) como identificador de una persona.
