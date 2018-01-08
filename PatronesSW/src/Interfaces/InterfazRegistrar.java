@@ -5,13 +5,18 @@
  */
 package Interfaces;
 
+import Singleton.Serializa;
 import Clases.Usuario;
+import java.awt.IllegalComponentStateException;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,13 +29,22 @@ public class InterfazRegistrar extends javax.swing.JFrame {
      * Creates new form InterfazRegistrar
      */
     //Creamos un HashMap de la clase Cliente llamado tablaClientes
-    HashMap<String, Usuario> tablaUsuarios = new HashMap<>();
+    Serializa serializa;
     public InterfazRegistrar() {
         //Título de la ventana
         this.setTitle("Nuevo Registro");
+                
+        try{
         initComponents();
         NIFPersona.setText("00000000-A");
-        CargarClientes();
+           try {
+                serializa = Serializa.getInstancia();
+           } catch (IOException | ClassNotFoundException ex) {
+               Logger.getLogger(InterfazRegistrar.class.getName()).log(Level.SEVERE, null, ex);
+           }
+        }
+       catch(IllegalComponentStateException e){}
+       // CargarClientes();
     }
 
     /**
@@ -232,8 +246,7 @@ public class InterfazRegistrar extends javax.swing.JFrame {
                 //Instanciamos un objeto, lo añadimos al HashMap y lo guardamos en el .dat
                 Usuario cl1 = new Usuario(nombre,apellidos,NIF,correo,contrasena, profesor);
                 //ponemos como clave el correo de manera que el nombre de usuario sea el correo
-                tablaUsuarios.put(correo, cl1);
-                GuardarCliente();
+                serializa.GuardarCliente(correo, cl1);
                 System.out.println("Cliente g");
                 
                 //Nos lleva a la ventana principal
@@ -259,37 +272,9 @@ public class InterfazRegistrar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_checkAlumnoActionPerformed
     //Metodo para guardar los clientes en un .dat
-    private void GuardarCliente(){
-        try{
-            FileOutputStream fos=new FileOutputStream("usuarios.txt");
-            ObjectOutputStream oos=new ObjectOutputStream(fos);
-            /*for (HashMap.Entry<String, Usuario> entry : tablaUsuarios.entrySet()) {
-                System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue().getNIF());
-            }*/
-            oos.writeObject(tablaUsuarios);
-            fos.close();
-        }catch(Exception e){
-           JOptionPane.showMessageDialog(this,"No se ha podido guardar el cliente."); 
-           tablaUsuarios=new HashMap<>();
-        }
-    }
     
-    //Metodo para cargar los clientes del .dat
-    private void CargarClientes(){
-        try{
-            FileInputStream fis = new FileInputStream("usuarios.txt");
-            ObjectInputStream ois=new ObjectInputStream(fis);
-            tablaUsuarios=(HashMap)ois.readObject();
-            for (HashMap.Entry<String, Usuario> entry : tablaUsuarios.entrySet()) {
-                System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue().getNIF());
-            }
-            fis.close();
-            
-        }catch(Exception e){
-           JOptionPane.showMessageDialog(this,"No hay archivo que almacene los clientes."); 
-           tablaUsuarios=new HashMap<>();
-        }
-    }
+    
+    
     /**
      * @param args the command line arguments
      */

@@ -6,7 +6,9 @@
 package Interfaces;
 
 import Clases.*;
+import Singleton.Serializa;
 import java.awt.HeadlessException;
+import java.awt.IllegalComponentStateException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -30,10 +32,17 @@ public class InicioSesion extends javax.swing.JFrame {
     /**
      * Creates new form InicioSesion
      */
-    //Creamos un HashMap de la clase Cliente llamado tablaClientes
-    HashMap<String, Usuario> tablaUsuarios;
+    Serializa serializa;
     public InicioSesion() {
+        try{
         initComponents();
+           try {
+                serializa = Serializa.getInstancia();
+           } catch (IOException | ClassNotFoundException ex) {
+               Logger.getLogger(InterfazRegistrar.class.getName()).log(Level.SEVERE, null, ex);
+           }
+        }
+       catch(IllegalComponentStateException e){}
     }
 
     /**
@@ -121,8 +130,9 @@ public class InicioSesion extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Rellene los campos de Usuario y Contraseña");
         }
         else{
+            HashMap<String, Usuario> tablaUsuarios;
             //Cargamos los clientes ya registrados anteriormente
-            CargarClientes();
+            tablaUsuarios = serializa.CargarClientes();
             //Declaramos atributos
             String usuario=user.getText();
             String password=pass.getText();
@@ -204,22 +214,7 @@ public class InicioSesion extends javax.swing.JFrame {
         });
     }
     
-    //Metodo para cargar los clientes del .dat
-    private void CargarClientes(){
-        try{
-            FileInputStream fis = new FileInputStream("usuarios.txt");
-            ObjectInputStream ois=new ObjectInputStream(fis);
-            tablaUsuarios=(HashMap)ois.readObject();
-           
-            fis.close();
-            
-            
-        }catch(Exception e){
-          JOptionPane.showMessageDialog(this,"No hay archivo que almacene los clientes.");
-          System.err.println(e);
-          tablaUsuarios=new HashMap<>();
-        }
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
