@@ -143,16 +143,22 @@ public class InicioSesion extends javax.swing.JFrame {
                         //Si la contraseña de la clase Cliente y la introducida son iguales, accedemos a la aplicación
                         if (contrasena.equals(password)){
                             //Lleva a la ventana de Clientes
-                            InterfazUser ia = new InterfazUser(c);
-                            ia.setVisible(true);
-                            this.setVisible(false);
+                            if(c.getProfesor()){
+                                InterfazProfesor ia = new InterfazProfesor(c);
+                                ia.setVisible(true);
+                                this.setVisible(false);  
+                            }else{
+                                InterfazUser ia = new InterfazUser(c);
+                                ia.setVisible(true);
+                                this.setVisible(false); 
+                            }
+                            
                         }
                         else{
                             JOptionPane.showMessageDialog(this, "USUARIO NO ENCONTRADO");
                         }
             
                     }//fin del if
-                    System.out.println("pass: "+password);
                 }//fin del try
                 catch (HeadlessException e){
                     System.err.println(e);

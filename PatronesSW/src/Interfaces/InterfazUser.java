@@ -24,6 +24,7 @@ public class InterfazUser extends javax.swing.JFrame {
   public InterfazUser(Usuario c){
       this.c = c;
       initComponents();
+       this.jTextField1.setText("@"+c.getNombreUsuario());
   }
 
     /**

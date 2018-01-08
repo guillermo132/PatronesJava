@@ -6,6 +6,7 @@
 package Clases;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,15 +20,17 @@ public class Usuario implements Serializable{
     String tipoUsuario;
     String nombreUsuario;
     String clave;
-    
+    boolean profesor;
+    ArrayList<String> listTfg = new ArrayList<String>();
     //Constructor
-    public Usuario(String nombre, String apellidos, String NIF, String nombreUsuario, String clave){
+    public Usuario(String nombre, String apellidos, String NIF, String nombreUsuario, String clave, boolean profesor){
         
         this.nombre=nombre;
         this.apellidos=apellidos;
         this.NIF=NIF;
         this.nombreUsuario=nombreUsuario;
         this.clave=clave;
+        this.profesor = profesor;
     
     }
     
@@ -71,4 +74,24 @@ public class Usuario implements Serializable{
     public void setClave(String clave) {
         this.clave=clave;
     }
+    public void setProfesor(boolean profesor){
+        this.profesor = profesor;
+    }
+    public boolean getProfesor(){
+        return this.profesor;
+    }
+    
+    public boolean setTfg(String tfg){
+        if(this.listTfg.size() == 5 || !this.profesor){
+            return false;
+        }else{
+            this.listTfg.add(tfg);
+            return true;
+        }
+    }
+    
+    public ArrayList<String> getTfg(){
+        return this.listTfg;
+    }
+    
 }

@@ -56,6 +56,9 @@ public class InterfazRegistrar extends javax.swing.JFrame {
         contraseñaUsuario = new javax.swing.JTextField();
         botonRegistrar = new javax.swing.JButton();
         botonAtras = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        checkProfesor = new javax.swing.JRadioButton();
+        checkAlumno = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,12 +96,31 @@ public class InterfazRegistrar extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Tipo:");
+
+        buttonGroup1.add(checkProfesor);
+        checkProfesor.setSelected(true);
+        checkProfesor.setText("Profesor");
+        checkProfesor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkProfesorActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(checkAlumno);
+        checkAlumno.setText("Alumno");
+        checkAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkAlumnoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
+                .addContainerGap(49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -120,13 +142,21 @@ public class InterfazRegistrar extends javax.swing.JFrame {
                                         .addComponent(nombrePersona, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)))
                                 .addGap(40, 40, 40)
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(apellidosPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(apellidosPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(checkProfesor)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(checkAlumno))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(103, 103, 103)
                                 .addComponent(jLabel1)))
-                        .addContainerGap(38, Short.MAX_VALUE))
+                        .addContainerGap(41, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
@@ -153,11 +183,14 @@ public class InterfazRegistrar extends javax.swing.JFrame {
                     .addComponent(nombrePersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(apellidosPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(NIFPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                    .addComponent(NIFPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(checkProfesor)
+                    .addComponent(checkAlumno))
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(nombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -190,8 +223,14 @@ public class InterfazRegistrar extends javax.swing.JFrame {
             String NIF = NIFPersona.getText();
             String correo = nombreUsuario.getText();
             String contrasena = contraseñaUsuario.getText();
+            boolean profesor;
+            if(checkProfesor.isSelected()){
+                profesor = true;
+            }else{
+                profesor = false;
+            }
                 //Instanciamos un objeto, lo añadimos al HashMap y lo guardamos en el .dat
-                Usuario cl1 = new Usuario(nombre,apellidos,NIF,correo,contrasena);
+                Usuario cl1 = new Usuario(nombre,apellidos,NIF,correo,contrasena, profesor);
                 //ponemos como clave el correo de manera que el nombre de usuario sea el correo
                 tablaUsuarios.put(correo, cl1);
                 GuardarCliente();
@@ -211,18 +250,23 @@ public class InterfazRegistrar extends javax.swing.JFrame {
         this.setVisible(false);
         ip.setVisible(true);
     }//GEN-LAST:event_botonAtrasActionPerformed
+
+    private void checkProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkProfesorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkProfesorActionPerformed
+
+    private void checkAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAlumnoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkAlumnoActionPerformed
     //Metodo para guardar los clientes en un .dat
     private void GuardarCliente(){
         try{
             FileOutputStream fos=new FileOutputStream("usuarios.txt");
-            System.out.println("1");
             ObjectOutputStream oos=new ObjectOutputStream(fos);
-            System.out.println("2");
-            for (HashMap.Entry<String, Usuario> entry : tablaUsuarios.entrySet()) {
+            /*for (HashMap.Entry<String, Usuario> entry : tablaUsuarios.entrySet()) {
                 System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue().getNIF());
-            }
+            }*/
             oos.writeObject(tablaUsuarios);
-            System.out.println("3");
             fos.close();
         }catch(Exception e){
            JOptionPane.showMessageDialog(this,"No se ha podido guardar el cliente."); 
@@ -257,11 +301,14 @@ public class InterfazRegistrar extends javax.swing.JFrame {
     private javax.swing.JButton botonAtras;
     private javax.swing.JButton botonRegistrar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JRadioButton checkAlumno;
+    private javax.swing.JRadioButton checkProfesor;
     private javax.swing.JTextField contraseñaUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField nombrePersona;
