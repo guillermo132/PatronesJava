@@ -5,6 +5,7 @@
  */
 package Singleton;
 
+import Clases.Tfg;
 import Clases.Usuario;
 import java.io.EOFException;
 import java.io.File;
@@ -23,6 +24,7 @@ import javax.swing.JOptionPane;
  * @author joserra
  */
 public class Serializa {
+    ArrayList <Tfg> tfgs = new ArrayList<>();
     HashMap<String, Usuario> tablaUsuarios = new HashMap<>();
     private static Serializa instancia;
     
@@ -83,6 +85,36 @@ public class Serializa {
         }catch(Exception e){
            System.err.println("No se ha podido guardar el cliente."); 
            tablaUsuarios=new HashMap<>();
+        }
+    }
+    
+    public ArrayList CargarTfg(){
+        try{
+            FileInputStream fis = new FileInputStream("tfgs.txt");
+            ObjectInputStream ois=new ObjectInputStream(fis);
+            tfgs=(ArrayList)ois.readObject();
+            System.out.println(tfgs);
+            fis.close();
+            
+            
+        }catch(Exception e){
+           System.err.println("No hay archivo que almacene los tfg."); 
+           tfgs=new ArrayList<>();
+        }
+        return tfgs;
+        
+    }
+    
+    public void GuardarTfg(Tfg tfg){
+        try{
+            tfgs.add(tfg);
+            FileOutputStream fos=new FileOutputStream("tfgs.txt");
+            ObjectOutputStream oos=new ObjectOutputStream(fos);
+            oos.writeObject(tfgs);
+            fos.close();
+        }catch(Exception e){
+           System.err.println("No se ha podido guardar el cliente."); 
+           tfgs=new ArrayList<>();
         }
     }
 }

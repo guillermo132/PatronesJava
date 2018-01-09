@@ -63,4 +63,11 @@ public class Iterator {
             return true;
         return false;
     }
+    
+    public boolean tieneSiguiente() {
+        boolean result;
+        if (numTfg < tamTfg) { result = true; }
+        else { result = false; }
+        return result;
+    }
 }
