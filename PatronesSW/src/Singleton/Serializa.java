@@ -55,17 +55,13 @@ public class Serializa {
     
     
     //Metodo para cargar los clientes del .dat
-    public HashMap CargarClientes(){
+    public HashMap<String, Usuario> CargarClientes(){
         try{
             FileInputStream fis = new FileInputStream("usuarios.txt");
             ObjectInputStream ois=new ObjectInputStream(fis);
             tablaUsuarios=(HashMap)ois.readObject();
-            for (HashMap.Entry<String, Usuario> entry : tablaUsuarios.entrySet()) {
-                System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue().getNIF());
-            }
             fis.close();
-            
-            
+
         }catch(Exception e){
            System.err.println("No hay archivo que almacene los clientes."); 
            tablaUsuarios=new HashMap<>();

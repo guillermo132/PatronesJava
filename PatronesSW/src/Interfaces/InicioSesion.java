@@ -165,10 +165,14 @@ public class InicioSesion extends javax.swing.JFrame {
                             
                         }
                         else{
-                            JOptionPane.showMessageDialog(this, "USUARIO NO ENCONTRADO");
+                            JOptionPane.showMessageDialog(this, "PASSWORD INCORRECTA");
                         }
             
                     }//fin del if
+                    else{
+                            JOptionPane.showMessageDialog(this, "USUARIO NO ENCONTRADO");
+                    }
+            
                 }//fin del try
                 catch (HeadlessException e){
                     System.err.println(e);
@@ -176,7 +180,7 @@ public class InicioSesion extends javax.swing.JFrame {
                 }
             }//fin del else
                  
-        }//fin else          
+        }//fin else         
     }//GEN-LAST:event_loginActionPerformed
 
     /**
