@@ -17,42 +17,20 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
     /**
      * Creates new form InterfazVisualizarTfg
      */
+    Tfg tfg;
     public InterfazVisualizarTfg() {
         initComponents();
-    }
-    
-    
-    
-    public void cargarDatos(int cand){
         
-        try{
-            Tfg tfg = UtilAgencia.candidatos.get(cand);
-            textoTfg.setText(tfg.getIdTfg()); 
-            textoDpto.setText(tfg.getDepartamento());  
-            textoTutor.setText(tfg.getTutor()); 
-            textoTitulo.setText(tfg.getTitulo()); 
-            textoGrados.setText(tfg.getGrados()); 
-            textoRequisitos.setText(tfg.getRequisitos());  
-            textoAlumnoAsignado.setText(tfg.getAlumnoAsignado());
-            textoDescripcion.setText(tfg.getDescripcion());
-
-            String cno = uno.getOcupaciones();
-            modelo.clear();
-            ArrayList acno = UtilAgencia.getNombresCNO(cno);
-            for (int i = 0; i < acno.size(); i++) {
-                modelo.addElement(acno.get(i).toString());
-            }
-            if(uno.getDiscapacidad() != 0)
-                cbDis.setSelected(true);
-            else
-                cbDis.setSelected(false);
-            sueldo = new SueldoNeto(uno);
-            txtSalarioNeto.setText(sueldo.getSueldoNeto());
-        }catch(Exception e){ 
-            System.out.println(e.toString());
-        }
     }
-
+    public InterfazVisualizarTfg(Tfg tfg) {
+        this.tfg = tfg;
+        initComponents();
+        inicializarDatos();
+    }
+    
+    private void inicializarDatos(){
+        this.textoTfg.setText(this.tfg.getIdTfg());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -80,14 +58,15 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         textoDescripcion = new javax.swing.JTextPane();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel1.setText("Lista TFG");
+
+        textoTfg.setEnabled(false);
 
         jLabel2.setText("ID TFG:");
 
@@ -107,11 +86,14 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
 
         jLabel6.setText("Descripcion:");
 
-        jButton1.setText("Anterior");
-
-        jButton2.setText("Siguiente");
-
         jButton3.setText("Atras");
+
+        jButton4.setText("Imprimir TFG");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,42 +108,37 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textoAlumnoAsignado, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                            .addComponent(textoTitulo)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textoAlumnoAsignado, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-                                    .addComponent(textoTitulo)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(textoTutor, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-                                                .addComponent(textoTfg)
-                                                .addComponent(textoDpto))
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(textoRequisitos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                                                .addComponent(textoGrados, javax.swing.GroupLayout.Alignment.LEADING)))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(textoTutor, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                                        .addComponent(textoTfg)
+                                        .addComponent(textoDpto))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(textoRequisitos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                        .addComponent(textoGrados, javax.swing.GroupLayout.Alignment.LEADING)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(92, 92, 92)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(72, 72, 72))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton4)
+                                .addGap(207, 207, 207)
                                 .addComponent(jButton3)
                                 .addGap(42, 42, 42))))))
         );
@@ -204,14 +181,17 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
                             .addComponent(textoAlumnoAsignado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
                 .addGap(22, 22, 22))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,9 +229,8 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
