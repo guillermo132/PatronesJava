@@ -7,6 +7,7 @@ package Interfaces;
 
 import Clases.Tfg;
 import Singleton.Serializa;
+import Adapter.IdTfgCorrecto;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +22,8 @@ public class InterfazRegistrarTfg extends javax.swing.JFrame {
     /**
      * Creates new form InterfazRegistrarTfg
      */
-    Serializa serializa;
+    private Serializa serializa;
+    private IdTfgCorrecto idCorrecto;
     public InterfazRegistrarTfg() {
         initComponents();
         try {
@@ -194,16 +196,25 @@ public class InterfazRegistrarTfg extends javax.swing.JFrame {
             String descripcion = campoDescripcion.getText();
             String grados = campoGrados.getText();
             String requisitos = campoRequisitos.getText();
-                //Instanciamos un objeto, lo añadimos al HashMap y lo guardamos en el .dat
-                Tfg tfg = new Tfg(idTfg, departamento, tutor, titulo, descripcion, grados, requisitos, "");
-                //ponemos como clave el correo de manera que el nombre de usuario sea el correo
-                serializa.GuardarTfg(tfg);
-                System.out.println("Tfg "+idTfg+" Guardado");
-                
-                //Nos lleva a la ventana principal
-                InterfazProfesor ip = new InterfazProfesor();
-                this.setVisible(false);
-                ip.setVisible(true); 
+            
+            
+            
+            //Instanciamos un objeto, lo añadimos al HashMap y lo guardamos en el .dat
+            Tfg tfg = new Tfg(idTfg, departamento, tutor, titulo, descripcion, grados, requisitos, "");
+            
+            
+            //patron adapter
+            idCorrecto = new IdTfgCorrecto(tfg);
+            tfg.setIdTfg(idCorrecto);
+            
+            //ponemos como clave el correo de manera que el nombre de usuario sea el correo
+            serializa.GuardarTfg(tfg);
+            System.out.println("Tfg "+idTfg+" Guardado");
+
+            //Nos lleva a la ventana principal
+            InterfazProfesor ip = new InterfazProfesor();
+            this.setVisible(false);
+            ip.setVisible(true); 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
