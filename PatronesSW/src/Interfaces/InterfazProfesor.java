@@ -27,14 +27,10 @@ public class InterfazProfesor extends javax.swing.JFrame {
     public InterfazProfesor() {
         initComponents();
     }
-    public InterfazProfesor(Usuario u) {
+    public InterfazProfesor(Usuario u, Serializa serializa) {
         this.u = u;
         initComponents();
-         try {
-            serializa = Serializa.getInstancia();
-        } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(InterfazRegistrar.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.serializa = serializa;
         nameProfesor.setText("@"+this.u.getNombreUsuario());
     }
 

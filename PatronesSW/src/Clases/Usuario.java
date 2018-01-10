@@ -20,20 +20,23 @@ public class Usuario implements Serializable{
     String tipoUsuario;
     String nombreUsuario;
     String clave;
-    boolean profesor;
+    boolean profesor = false;
+    boolean invitado = false;
     ArrayList<String> listTfg = new ArrayList<String>();
     //Constructor
     public Usuario(String nombre, String apellidos, String NIF, String nombreUsuario, String clave, boolean profesor){
-        
         this.nombre=nombre;
         this.apellidos=apellidos;
         this.NIF=NIF;
         this.nombreUsuario=nombreUsuario;
         this.clave=clave;
         this.profesor = profesor;
-    
     }
-    
+    public Usuario(String nombre, String clave){
+        this.nombre = nombre;
+        this.clave = clave;
+        this.invitado = true;
+    }
     //Métodos Get y Set
     public String getNombre() {
         return nombre;
@@ -92,6 +95,9 @@ public class Usuario implements Serializable{
     
     public ArrayList<String> getTfg(){
         return this.listTfg;
+    }
+    public boolean getInvitado(){
+        return this.invitado;
     }
     
 }

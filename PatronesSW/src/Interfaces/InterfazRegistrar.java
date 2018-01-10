@@ -247,7 +247,6 @@ public class InterfazRegistrar extends javax.swing.JFrame {
                 Usuario cl1 = new Usuario(nombre,apellidos,NIF,correo,contrasena, profesor);
                 //ponemos como clave el correo de manera que el nombre de usuario sea el correo
                 serializa.GuardarCliente(correo, cl1);
-                System.out.println("Cliente g");
                 
                 //Nos lleva a la ventana principal
                 InterfazAdmin ip = new InterfazAdmin();

@@ -7,19 +7,12 @@ package Interfaces;
 
 import Clases.*;
 import Singleton.Serializa;
+import AbstractFactory.ControlUsuarios;
 import java.awt.HeadlessException;
 import java.awt.IllegalComponentStateException;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 
@@ -32,12 +25,11 @@ public class InicioSesion extends javax.swing.JFrame {
     /**
      * Creates new form InicioSesion
      */
-    Serializa serializa;
     public InicioSesion() {
         try{
         initComponents();
            try {
-                serializa = Serializa.getInstancia();
+                Serializa serializa = Serializa.getInstancia();
            } catch (IOException | ClassNotFoundException ex) {
                Logger.getLogger(InterfazRegistrar.class.getName()).log(Level.SEVERE, null, ex);
            }
@@ -60,6 +52,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         login = new javax.swing.JButton();
         pass = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,6 +72,13 @@ public class InicioSesion extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Conectar como Invitado");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,39 +86,43 @@ public class InicioSesion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(user)
-                            .addComponent(pass, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(58, 58, 58)
+                                    .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(login)))
-                .addContainerGap(67, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(144, 144, 144))
+                        .addContainerGap()
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(login)
+                        .addGap(72, 72, 72)
+                        .addComponent(jButton1)))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addComponent(login)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(login))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
@@ -132,14 +136,14 @@ public class InicioSesion extends javax.swing.JFrame {
         else{
             HashMap<String, Usuario> tablaUsuarios;
             //Cargamos los clientes ya registrados anteriormente
-            tablaUsuarios = serializa.CargarClientes();
+            tablaUsuarios = Serializa.CargarClientes();
             //Declaramos atributos
             String usuario=user.getText();
             String password=pass.getText();
          
             //Miramos a ver si Usuario es "admin" y Contraseña es "admin" y si lo es, vamos a la interfaz del administrador
             if ((usuario.equals("admin")) && (password.equals("admin"))){
-                InterfazAdmin ia = new InterfazAdmin();
+                InterfazAdmin ia = new InterfazAdmin(serializa);
                 ia.setVisible(true);
                 this.setVisible(false);
             }
@@ -154,11 +158,11 @@ public class InicioSesion extends javax.swing.JFrame {
                         if (contrasena.equals(password)){
                             //Lleva a la ventana de Clientes
                             if(c.getProfesor()){
-                                InterfazProfesor ia = new InterfazProfesor(c);
+                                InterfazProfesor ia = new InterfazProfesor(c, serializa);
                                 ia.setVisible(true);
                                 this.setVisible(false);  
                             }else{
-                                InterfazUser ia = new InterfazUser(c);
+                                InterfazUser ia = new InterfazUser(c, serializa);
                                 ia.setVisible(true);
                                 this.setVisible(false); 
                             }
@@ -182,6 +186,14 @@ public class InicioSesion extends javax.swing.JFrame {
                  
         }//fin else         
     }//GEN-LAST:event_loginActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Usuario c = new ControlUsuarios().getUsuario(user.getText(), pass.getText());
+        InterfazUser ia = new InterfazUser(c, serializa);
+        ia.setVisible(true);
+        this.setVisible(false); 
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,6 +233,7 @@ public class InicioSesion extends javax.swing.JFrame {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -7,7 +7,6 @@ package Singleton;
 
 import Clases.Tfg;
 import Clases.Usuario;
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,7 +16,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,35 +29,15 @@ public class Serializa {
     
     private Serializa()throws FileNotFoundException,  ClassNotFoundException,   IOException{
         File fichero = new File("usuarios.txt"); 
-        if(fichero.exists()){
-            try{
-
-                FileInputStream archiv= new FileInputStream("usuarios.txt");
-                ObjectInputStream lector = new ObjectInputStream(archiv);
-                tablaUsuarios = (HashMap) lector.readObject();
-
-            }catch(EOFException e){
-
-                }
-            } else {
-                //Creamos el fichero
-                fichero.createNewFile();
-            }
+        if(!fichero.exists()){
+            //Creamos el fichero
+            fichero.createNewFile();
+        }
         File ficherotfg = new File("tfgs.txt"); 
-        if(ficherotfg.exists()){
-            try{
-
-                FileInputStream archiv= new FileInputStream("tfgs.txt");
-                ObjectInputStream lector = new ObjectInputStream(archiv);
-                tfgs = (ArrayList<Tfg>) lector.readObject();
-
-            }catch(EOFException e){
-
-                }
-            } else {
-                //Creamos el fichero
-                fichero.createNewFile();
-            }
+        if(!ficherotfg.exists()){
+            //Creamos el fichero
+            fichero.createNewFile();
+        }
     }
     
     public static Serializa getInstancia()throws FileNotFoundException, IOException, ClassNotFoundException{

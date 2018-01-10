@@ -6,7 +6,7 @@ import java.io.IOException;
 
 /**
  *
- * @author ivanparrillalopez
+ * @author Guillermo Gomez
  */
 public interface Servidor {
     public void imprimir(Tfg tf) throws IOException;

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author joserra
+ * @author Guillermo Gomez
  */
 public class Iterator {
     int tamTfg;

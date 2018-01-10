@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author ivanparrillalopez
+ * @author Guillermo Gomez
  */
 public class ImprimirFichero implements Servidor {
 
