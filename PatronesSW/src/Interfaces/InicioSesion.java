@@ -25,11 +25,12 @@ public class InicioSesion extends javax.swing.JFrame {
     /**
      * Creates new form InicioSesion
      */
+    private Serializa serializa;
     public InicioSesion() {
         try{
         initComponents();
            try {
-                Serializa serializa = Serializa.getInstancia();
+                serializa = Serializa.getInstancia();
            } catch (IOException | ClassNotFoundException ex) {
                Logger.getLogger(InterfazRegistrar.class.getName()).log(Level.SEVERE, null, ex);
            }
@@ -136,7 +137,7 @@ public class InicioSesion extends javax.swing.JFrame {
         else{
             HashMap<String, Usuario> tablaUsuarios;
             //Cargamos los clientes ya registrados anteriormente
-            tablaUsuarios = Serializa.CargarClientes();
+            tablaUsuarios = serializa.CargarClientes();
             //Declaramos atributos
             String usuario=user.getText();
             String password=pass.getText();
