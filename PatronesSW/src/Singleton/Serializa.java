@@ -24,28 +24,42 @@ import javax.swing.JOptionPane;
  * @author joserra
  */
 public class Serializa {
-    ArrayList <Tfg> tfgs = new ArrayList<>();
+    ArrayList<Tfg> tfgs = new ArrayList<>();
     HashMap<String, Usuario> tablaUsuarios = new HashMap<>();
     private static Serializa instancia;
     
     
     private Serializa()throws FileNotFoundException,  ClassNotFoundException,   IOException{
-        File fichero = new File("usuarios.txt");
-        
+        File fichero = new File("usuarios.txt"); 
         if(fichero.exists()){
-        try{
-            
-        FileInputStream archiv= new FileInputStream("usuarios.txt");
-        ObjectInputStream lector = new ObjectInputStream(archiv);
-        tablaUsuarios = (HashMap) lector.readObject();
-      
-        }catch(EOFException e){
-            
+            try{
+
+                FileInputStream archiv= new FileInputStream("usuarios.txt");
+                ObjectInputStream lector = new ObjectInputStream(archiv);
+                tablaUsuarios = (HashMap) lector.readObject();
+
+            }catch(EOFException e){
+
+                }
+            } else {
+                //Creamos el fichero
+                fichero.createNewFile();
             }
-        } else {
-        //Creamos el fichero
-        fichero.createNewFile();
-        }
+        File ficherotfg = new File("tfgs.txt"); 
+        if(ficherotfg.exists()){
+            try{
+
+                FileInputStream archiv= new FileInputStream("tfgs.txt");
+                ObjectInputStream lector = new ObjectInputStream(archiv);
+                tfgs = (ArrayList<Tfg>) lector.readObject();
+
+            }catch(EOFException e){
+
+                }
+            } else {
+                //Creamos el fichero
+                fichero.createNewFile();
+            }
     }
     
     public static Serializa getInstancia()throws FileNotFoundException, IOException, ClassNotFoundException{
@@ -88,15 +102,12 @@ public class Serializa {
         }
     }
     
-    public ArrayList CargarTfg(){
+    public ArrayList<Tfg> CargarTfg(){
         try{
             FileInputStream fis = new FileInputStream("tfgs.txt");
             ObjectInputStream ois=new ObjectInputStream(fis);
             tfgs=(ArrayList)ois.readObject();
-            System.out.println(tfgs);
-            fis.close();
-            
-            
+            fis.close();   
         }catch(Exception e){
            System.err.println("No hay archivo que almacene los tfg."); 
            tfgs=new ArrayList<>();

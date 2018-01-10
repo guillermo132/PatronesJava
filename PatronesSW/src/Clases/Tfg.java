@@ -6,6 +6,7 @@
 package Clases;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,14 +14,15 @@ import java.io.Serializable;
  */
 public class Tfg implements Serializable{
     //Atributos
-    String idTfg;
-    String departamento;
-    String tutor;
-    String titulo;
-    String descripcion;
-    String grados;
-    String requisitos;
-    String alumnoAsignado;
+    private String idTfg;
+    private String departamento;
+    private String tutor;
+    private String titulo;
+    private String descripcion;
+    private String grados;
+    private String requisitos;
+    private String alumnoAsignado;
+    private ArrayList<Usuario> listaPeticiones;
     
     public Tfg(String idTfg, String departamento, String tutor, String titulo, String descripcion, String grados, String requisitos, String alumnoAsignado){
         this.idTfg = idTfg;
@@ -31,6 +33,7 @@ public class Tfg implements Serializable{
         this.grados = grados;
         this.requisitos = requisitos;
         this.alumnoAsignado = alumnoAsignado;
+        this.listaPeticiones = new ArrayList<Usuario>();
     }
     
     public String getIdTfg() {
@@ -90,5 +93,10 @@ public class Tfg implements Serializable{
     public void setAlumnoAsignado(String alumnoAsignado) {
         this.alumnoAsignado=alumnoAsignado;
     }
-    
+    public void setAlumnno(Usuario user){
+        this.listaPeticiones.add(user);
+    }
+    public ArrayList<Usuario> getAlumno(){
+        return this.listaPeticiones;
+    }
 }

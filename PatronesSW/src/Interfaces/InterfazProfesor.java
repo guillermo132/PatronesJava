@@ -6,6 +6,11 @@
 package Interfaces;
 
 import Clases.Usuario;
+import Singleton.Serializa;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -17,13 +22,19 @@ public class InterfazProfesor extends javax.swing.JFrame {
     /**
      * Creates new form InterfazProfesor1
      */
-   Usuario u;
+    Usuario u;
+    private Serializa serializa ;
     public InterfazProfesor() {
         initComponents();
     }
     public InterfazProfesor(Usuario u) {
         this.u = u;
         initComponents();
+         try {
+            serializa = Serializa.getInstancia();
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(InterfazRegistrar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         nameProfesor.setText("@"+this.u.getNombreUsuario());
     }
 
@@ -115,9 +126,14 @@ public class InterfazProfesor extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        InterfazListaTfg lt = new InterfazListaTfg();
-        this.setVisible(false);
-        lt.setVisible(true);
+        if(serializa.CargarTfg().isEmpty()){
+            JOptionPane.showMessageDialog(this, "TODAVÍA NO HAY TFGS REGISTRADOS", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            InterfazVisualizarTfg lt = new InterfazVisualizarTfg();
+            this.setVisible(false);
+            lt.setVisible(true);   
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

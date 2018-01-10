@@ -43,27 +43,29 @@ public class ImprimirFichero implements Servidor {
 
     public void imprimir(Tfg tf) throws IOException {
        try (PrintWriter salida = new PrintWriter(new BufferedWriter(new FileWriter(tf.getTitulo()+ ".txt")))) {
-           
-//            salida.println("----------------------Candidato----------------------");
-//            salida.println("\n");
-//            salida.println("\n");
-//            salida.println("NIF: " + o.getNif());
-//            salida.println("\n");
-//            salida.println("Nombre: " + o.getNombre());
-//            salida.println("\n");
-//            salida.println("TLF: " + o.getTelefono());
-//            salida.println("\n");
-//            salida.println("DIRECCIÓN: " + o.getDireccion());
-//            salida.println("\n");
-//            salida.println("OCUPACIÓN: " + o.getOcupaciones());
-//            salida.println("\n");
-//            salida.println("RANGO SALARIAL: " + o.getRangoSalarial());
-//            salida.println("\n");
-//
-//            salida.println("PALABRAS CLAVES: " + o.getPalabrasClave());
-//            salida.println("\n");
+            salida.println("----------------------TFG----------------------");
+            salida.println("\n");
+            salida.println("\n");
+            salida.println("ID: " + tf.getIdTfg());
+            salida.println("\n");
+            salida.println("Titulo: " + tf.getTitulo());
+            salida.println("\n");
+            salida.println("Departamento: " + tf.getDepartamento());
+            salida.println("\n");
+            salida.println("Grados: " + tf.getGrados());
+            salida.println("\n");
+            salida.println("Tutor: " + tf.getTutor());
+            salida.println("\n");
+            salida.println("Descripción: " + tf.getDescripcion());
+            salida.println("\n");
+            salida.println("Alumno asignado: " + tf.getAlumnoAsignado());
+            salida.println("\n");
+            salida.println("Requisitos: " + tf.getRequisitos());
+            salida.println("\n");
+
+            salida.println("\n");
   
-    }
+        }
     }
     
 }

@@ -9,6 +9,11 @@ import Clases.*;
 import Iterator.Iterator;
 import java.util.ArrayList;
 import Singleton.Serializa;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import proxy.*;
 
 /**
  *
@@ -19,27 +24,34 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
     /**
      * Creates new form InterfazVisualizarTfg
      */
-    Serializa serializa;
+    private Serializa serializa ;
     private ArrayList<Tfg> tfgs;
     private Iterator iterator;
+    private Tfg tfgActual;
+    private static Servidor proxy = new ProxyProteccion(new ImprimirFichero("MiServidor"));
     
     public InterfazVisualizarTfg() {
         initComponents();
+        try {
+            serializa = Serializa.getInstancia();
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(InterfazRegistrar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         iterator = new Iterator(serializa.CargarTfg());
         this.tfgs = serializa.CargarTfg();
         inicializarDatos(0);
     }
   
     private void inicializarDatos(int numtfg){
-        Tfg tfg = this.tfgs.get(numtfg);
-        this.textoTfg.setText(tfg.getIdTfg());
-        this.textoTitulo.setText(tfg.getIdTfg());
-        this.textoDpto.setText(tfg.getDepartamento());
-        this.textoAlumnoAsignado.setText(tfg.getAlumnoAsignado());
-        this.textoDescripcion.setText(tfg.getDescripcion());
-        this.textoGrados.setText(tfg.getGrados());
-        this.textoTutor.setText(tfg.getTutor());
-        this.textoRequisitos.setText(tfg.getRequisitos());
+        this.tfgActual = this.tfgs.get(numtfg);
+        this.textoTfg.setText(this.tfgActual.getIdTfg());
+        this.textoTitulo.setText(this.tfgActual.getIdTfg());
+        this.textoDpto.setText(this.tfgActual.getDepartamento());
+        this.textoAlumnoAsignado.setText(this.tfgActual.getAlumnoAsignado());
+        this.textoDescripcion.setText(this.tfgActual.getDescripcion());
+        this.textoGrados.setText(this.tfgActual.getGrados());
+        this.textoTutor.setText(this.tfgActual.getTutor());
+        this.textoRequisitos.setText(this.tfgActual.getRequisitos());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -238,6 +250,17 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        try {      
+            if (this.tfgActual != null) {
+                proxy.imprimir(this.tfgActual);
+                JOptionPane.showMessageDialog(this, "Impreso TFG: " + this.tfgActual.getTitulo()+
+                        " ofertado por " +this.tfgActual.getTutor()+ "\nFIchero" + this.tfgActual.getTitulo()+ 
+                        ".txt", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
