@@ -23,6 +23,7 @@ public class Tfg implements Serializable{
     private String requisitos;
     private String alumnoAsignado;
     private ArrayList<Usuario> listaPeticiones;
+    private boolean asignado = false;
     
     public Tfg(String idTfg, String departamento, String tutor, String titulo, String descripcion, String grados, String requisitos, String alumnoAsignado){
         this.idTfg = idTfg;
@@ -98,5 +99,11 @@ public class Tfg implements Serializable{
     }
     public ArrayList<Usuario> getAlumno(){
         return this.listaPeticiones;
+    }
+    public void setAsignado(boolean asignado){
+        this.asignado = asignado;
+    }
+    public boolean getAsignado(){
+        return asignado;
     }
 }

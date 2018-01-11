@@ -23,6 +23,7 @@ public class Usuario implements Serializable{
     boolean profesor = false;
     boolean invitado = false;
     ArrayList<String> listTfg = new ArrayList<String>();
+    boolean asignado = false;
     //Constructor
     public Usuario(String nombre, String apellidos, String NIF, String nombreUsuario, String clave, boolean profesor){
         this.nombre=nombre;
@@ -99,5 +100,16 @@ public class Usuario implements Serializable{
     public boolean getInvitado(){
         return this.invitado;
     }
+    
+    
+    public void setAsignado(boolean asignado){
+        this.asignado = asignado;
+    }
+    
+    public boolean getAsignado(){
+        return asignado;
+    }
+    
+    
     
 }
