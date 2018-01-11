@@ -146,14 +146,14 @@ public class InterfazProfesor extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        InterfazRegistrarTfg ip = new InterfazRegistrarTfg();
+        InterfazRegistrarTfg ip = new InterfazRegistrarTfg(this.serializa,this.u);
         this.setVisible(false);
         ip.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        InterfazAsignacionTfg ia = new InterfazAsignacionTfg(this.u);
+        InterfazAsignacionTfg ia = new InterfazAsignacionTfg(this.u, this.serializa);
         this.setVisible(false);
         ia.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed

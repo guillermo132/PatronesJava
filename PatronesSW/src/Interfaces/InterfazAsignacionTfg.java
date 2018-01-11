@@ -24,7 +24,7 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
      */
     private Serializa serializa;
     private Usuario nombreProfesor;
-    public InterfazAsignacionTfg(Usuario nombreProfesor) {
+    public InterfazAsignacionTfg(Usuario nombreProfesor, Serializa serializa) {
         initComponents();
         this.serializa = serializa;
         this.nombreProfesor=nombreProfesor;
@@ -98,9 +98,9 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 30, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
