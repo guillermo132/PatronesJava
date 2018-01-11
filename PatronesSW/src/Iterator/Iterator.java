@@ -16,7 +16,6 @@ public class Iterator {
     int numTfg;
     
     public Iterator(ArrayList datos){
-        System.out.println("iterator creado");
         this.numTfg = 0;
         this.tamTfg = datos.size()-1;
     }

@@ -5,13 +5,12 @@
  */
 package Interfaces;
 
+import Clases.Tfg;
 import Clases.Usuario;
 import Singleton.Serializa;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.Serializable;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
@@ -122,7 +121,9 @@ public class InterfazProfesor extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(serializa.CargarTfg().isEmpty()){
+        ArrayList<Tfg> listaTFG = new ArrayList<Tfg>();
+        listaTFG = serializa.CargarTfg();
+        if(listaTFG.isEmpty()){
             JOptionPane.showMessageDialog(this, "TODAVÍA NO HAY TFGS REGISTRADOS", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         }else{
             InterfazVisualizarTfg lt = new InterfazVisualizarTfg();

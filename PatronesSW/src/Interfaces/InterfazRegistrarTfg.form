@@ -24,7 +24,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace pref="36" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -37,26 +37,25 @@
                           <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="campoIdTfg" max="32767" attributes="0"/>
-                          <Component id="campoDepartamento" max="32767" attributes="0"/>
                           <Component id="campoTutor" max="32767" attributes="0"/>
                           <Component id="campoTitulo" max="32767" attributes="0"/>
                           <Component id="campoDescripcion" max="32767" attributes="0"/>
-                          <Component id="campoGrados" max="32767" attributes="0"/>
                           <Component id="campoRequisitos" pref="429" max="32767" attributes="0"/>
+                          <Component id="jComboBoxDepartamento" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="257" max="-2" attributes="0"/>
-                  </Group>
               </Group>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="258" max="-2" attributes="0"/>
+              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -73,7 +72,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoDepartamento" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComboBoxDepartamento" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -92,17 +91,12 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoGrados" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoRequisitos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoRequisitos" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="29" max="32767" attributes="0"/>
+              <EmptySpace pref="56" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -144,11 +138,6 @@
         <Property name="text" type="java.lang.String" value="Descripci&#xf3;n:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel7">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Grados:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
         <Property name="text" type="java.lang.String" value="Requisitos:"/>
@@ -164,8 +153,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="campoIdTfg">
     </Component>
-    <Component class="javax.swing.JTextField" name="campoDepartamento">
-    </Component>
     <Component class="javax.swing.JTextField" name="campoTutor">
     </Component>
     <Component class="javax.swing.JTextField" name="campoTitulo">
@@ -175,12 +162,32 @@
     </Component>
     <Component class="javax.swing.JTextField" name="campoDescripcion">
     </Component>
-    <Component class="javax.swing.JTextField" name="campoGrados">
-    </Component>
     <Component class="javax.swing.JTextField" name="campoRequisitos">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoRequisitosActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBoxDepartamento">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="11">
+            <StringItem index="0" value="Arquitectura"/>
+            <StringItem index="1" value="Autom&#xe1;tica"/>
+            <StringItem index="2" value="Ciencias Biom&#xe9;dicas"/>
+            <StringItem index="3" value="Ciencias Jur&#xed;dicas"/>
+            <StringItem index="4" value="Ciencias de la Educaci&#xf3;n"/>
+            <StringItem index="5" value="Econom&#xed;a"/>
+            <StringItem index="6" value="Electr&#xf3;nica"/>
+            <StringItem index="7" value="F&#xed;sica"/>
+            <StringItem index="8" value="Historia"/>
+            <StringItem index="9" value="Medicina"/>
+            <StringItem index="10" value="Qu&#xed;mica"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
