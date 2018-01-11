@@ -55,6 +55,7 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,6 +86,13 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Atras");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,11 +112,16 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jButton1)))
-                .addGap(36, 36, 36))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jButton1)))
+                        .addGap(36, 36, 36))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,7 +130,7 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +146,10 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
                         .addGap(161, 161, 161)
                         .addComponent(jButton1)
                         .addGap(76, 76, 76)
-                        .addComponent(jButton2))))
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addGap(20, 20, 20))))
         );
 
         pack();
@@ -153,10 +169,14 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
             Usuario usuarioSeleccionado = listaUsuarios.get(key2);
             
             if(usuarioSeleccionado.getAsignado()==false && tfgSeleccionado.getAsignado()==false){
-                usuarioSeleccionado.setAsignado(new EstadoAsignado().estado());
-                tfgSeleccionado.setAsignado(new EstadoAsignado().estado());
-                serializa.GuardarTfg(tfgSeleccionado);
-                serializa.GuardarCliente(key2, usuarioSeleccionado);
+                int choice =JOptionPane.showOptionDialog (this,"Desea asignar el TFG "+tfgSeleccionado.getIdTfg()+" al alumno "+usuarioSeleccionado.getNombreUsuario()+"?", "¿Asignar?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                if(choice == JOptionPane.YES_NO_OPTION){
+                    usuarioSeleccionado.setAsignado(new EstadoAsignado().estado());
+                    tfgSeleccionado.setAsignado(new EstadoAsignado().estado());
+                    serializa.GuardarTfg(tfgSeleccionado);
+                    serializa.GuardarCliente(key2, usuarioSeleccionado);
+                    JOptionPane.showMessageDialog(this,"Ha sido asignado el TFG "+tfgSeleccionado.getIdTfg()+" al alumno "+usuarioSeleccionado.getNombreUsuario());
+                }
             }
             else{
                JOptionPane.showMessageDialog(this,"El alumno / TFG ya han sido previamente asignados!"); 
@@ -186,10 +206,14 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
             
             if(usuarioSeleccionado.getAsignado()==true && tfgSeleccionado.getAsignado()==true){
             
-            usuarioSeleccionado.setAsignado(new EstadoNoAsignado().estado());
-            tfgSeleccionado.setAsignado(new EstadoNoAsignado().estado());
-            serializa.GuardarTfg(tfgSeleccionado);
-            serializa.GuardarCliente(key2, usuarioSeleccionado);
+                int choice =JOptionPane.showOptionDialog (this,"Desea desasignar el TFG "+tfgSeleccionado.getIdTfg()+" al alumno "+usuarioSeleccionado.getNombreUsuario()+"?", "¿Desasignar?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                if(choice == JOptionPane.YES_NO_OPTION){
+                    usuarioSeleccionado.setAsignado(new EstadoNoAsignado().estado());
+                    tfgSeleccionado.setAsignado(new EstadoNoAsignado().estado());
+                    serializa.GuardarTfg(tfgSeleccionado);
+                    serializa.GuardarCliente(key2, usuarioSeleccionado);
+                    JOptionPane.showMessageDialog(this,"Ha sido desasignado el TFG "+tfgSeleccionado.getIdTfg()+" al alumno "+usuarioSeleccionado.getNombreUsuario()); 
+                }
             }else{
                JOptionPane.showMessageDialog(this,"El alumno / TFG ya han sido previamente asignados!"); 
             }
@@ -200,6 +224,13 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Selecciona un tfg y un alumno para realizar la asignación."); 
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        InterfazProfesor ia = new InterfazProfesor(this.nombreProfesor, this.serializa);
+        this.setVisible(false);
+        ia.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     
     
@@ -239,6 +270,7 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
