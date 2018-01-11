@@ -28,7 +28,7 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
     private Serializa serializa;
     private Usuario nombreProfesor;
     private ArrayList<Tfg> listaTFG = new ArrayList<>();
-    HashMap<String,Usuario> listaUsuarios = new HashMap<>();
+    private HashMap<String,Usuario> listaUsuarios = new HashMap<>();
     public InterfazAsignacionTfg(Usuario nombreProfesor, Serializa serializa) {
         initComponents();
         this.serializa = serializa;
@@ -225,7 +225,9 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
         while (it.hasNext()){
             String key= (String) it.next();
             Usuario ll = listaUsuarios.get(key);
-            listModel.addElement(key);
+            if(ll.getProfesor()==false){
+                listModel.addElement(key);
+            }
         }
         jList2.setModel(listModel);
     }
