@@ -8,7 +8,10 @@ package Interfaces;
 import Clases.Tfg;
 import Singleton.Serializa;
 import Adapter.IdTfgCorrecto;
+import Clases.Usuario;
+import FactoryMethod.FactoriaDeGrados;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -24,13 +27,15 @@ public class InterfazRegistrarTfg extends javax.swing.JFrame {
      */
     private Serializa serializa;
     private IdTfgCorrecto idCorrecto;
-    public InterfazRegistrarTfg() {
+    private Usuario user;
+    public InterfazRegistrarTfg(){
         initComponents();
-        try {
-                serializa = Serializa.getInstancia();
-           } catch (IOException | ClassNotFoundException ex) {
-               Logger.getLogger(InterfazRegistrar.class.getName()).log(Level.SEVERE, null, ex);
-           }
+    }
+    public InterfazRegistrarTfg(Serializa serializa, Usuario user) {
+        initComponents();
+        this.serializa = serializa;
+        this.user = user;
+        this.campoTutor.setText(this.user.getNombre());
     }
 
     /**
@@ -82,6 +87,8 @@ public class InterfazRegistrarTfg extends javax.swing.JFrame {
             }
         });
 
+        campoTutor.setEditable(false);
+
         campoTitulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoTituloActionPerformed(evt);
@@ -94,7 +101,7 @@ public class InterfazRegistrarTfg extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arquitectura", "Automática", "Ciencias Biomédicas", "Ciencias Jurídicas", "Ciencias de la Educación", "Economía", "Electrónica", "Física", "Historia", "Medicina", "Química" }));
+        jComboBoxDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arquitectura", "Automática", "Ciencias Biomédicas", "Ciencias Jurídicas", "Ciencias de la Educación", "Economía", "Electrónica", "Física", "Historia", "Medicina", "Química", "Ciencias de la Computación" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,7 +166,7 @@ public class InterfazRegistrarTfg extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
@@ -177,7 +184,7 @@ public class InterfazRegistrarTfg extends javax.swing.JFrame {
         // TODO add your handling code here:
         //Si hay algún campo vacío, lanza mensaje
         if((campoIdTfg.getText().equals(""))||(this.jComboBoxDepartamento.getSelectedItem().toString().equals(""))||(campoTutor.getText().equals(""))||
-                (campoTitulo.getText().equals(""))||(campoDescripcion.getText().equals(""))||(campoGrados.getText().equals(""))) {                
+                (campoTitulo.getText().equals(""))||(campoDescripcion.getText().equals(""))) {                
                     JOptionPane.showMessageDialog(this,"Error, hay algún campo sin rellenar. Rellene todos los campos. El único campo opcional es Requisitos");
         }
         else{    
@@ -187,7 +194,7 @@ public class InterfazRegistrarTfg extends javax.swing.JFrame {
             String tutor = campoTutor.getText();
             String titulo = campoTitulo.getText();
             String descripcion = campoDescripcion.getText();
-            String grados = campoGrados.getText();
+            ArrayList<String> grados = FactoriaDeGrados.getGrados(departamento);
             String requisitos = campoRequisitos.getText();
             
             

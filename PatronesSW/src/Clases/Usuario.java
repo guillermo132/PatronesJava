@@ -22,7 +22,7 @@ public class Usuario implements Serializable{
     String clave;
     boolean profesor = false;
     boolean invitado = false;
-    ArrayList<String> listTfg = new ArrayList<String>();
+    ArrayList<String> listaTfg = new ArrayList<String>();
     //Constructor
     public Usuario(String nombre, String apellidos, String NIF, String nombreUsuario, String clave, boolean profesor){
         this.nombre=nombre;
@@ -85,16 +85,16 @@ public class Usuario implements Serializable{
     }
     
     public boolean setTfg(String tfg){
-        if(this.listTfg.size() == 5 || !this.profesor){
+        if(this.listaTfg.size() == 5 || !this.profesor){
             return false;
         }else{
-            this.listTfg.add(tfg);
+            this.listaTfg.add(tfg);
             return true;
         }
     }
     
     public ArrayList<String> getTfg(){
-        return this.listTfg;
+        return this.listaTfg;
     }
     public boolean getInvitado(){
         return this.invitado;

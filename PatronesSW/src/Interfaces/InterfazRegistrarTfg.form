@@ -96,7 +96,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="56" max="32767" attributes="0"/>
+              <EmptySpace pref="55" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -154,6 +154,9 @@
     <Component class="javax.swing.JTextField" name="campoIdTfg">
     </Component>
     <Component class="javax.swing.JTextField" name="campoTutor">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="campoTitulo">
       <Events>
@@ -170,7 +173,7 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxDepartamento">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="11">
+          <StringArray count="12">
             <StringItem index="0" value="Arquitectura"/>
             <StringItem index="1" value="Autom&#xe1;tica"/>
             <StringItem index="2" value="Ciencias Biom&#xe9;dicas"/>
@@ -182,6 +185,7 @@
             <StringItem index="8" value="Historia"/>
             <StringItem index="9" value="Medicina"/>
             <StringItem index="10" value="Qu&#xed;mica"/>
+            <StringItem index="11" value="Ciencias de la Computaci&#xf3;n"/>
           </StringArray>
         </Property>
       </Properties>

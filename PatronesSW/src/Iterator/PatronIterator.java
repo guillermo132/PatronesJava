@@ -11,11 +11,11 @@ import java.util.ArrayList;
  *
  * @author Guillermo Gomez
  */
-public class Iterator {
+public class PatronIterator {
     int tamTfg;
     int numTfg;
     
-    public Iterator(ArrayList datos){
+    public PatronIterator(ArrayList datos){
         this.numTfg = 0;
         this.tamTfg = datos.size()-1;
     }

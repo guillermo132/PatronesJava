@@ -126,7 +126,7 @@ public class InterfazProfesor extends javax.swing.JFrame {
         if(listaTFG.isEmpty()){
             JOptionPane.showMessageDialog(this, "TODAVÍA NO HAY TFGS REGISTRADOS", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         }else{
-            InterfazVisualizarTfg lt = new InterfazVisualizarTfg();
+            InterfazVisualizarTfg lt = new InterfazVisualizarTfg(this.u, this.serializa);
             this.setVisible(false);
             lt.setVisible(true);   
         }

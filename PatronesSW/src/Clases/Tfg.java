@@ -19,12 +19,12 @@ public class Tfg implements Serializable{
     private String tutor;
     private String titulo;
     private String descripcion;
-    private String grados;
+    private ArrayList<String> grados;
     private String requisitos;
     private String alumnoAsignado;
     private ArrayList<Usuario> listaPeticiones;
     
-    public Tfg(String idTfg, String departamento, String tutor, String titulo, String descripcion, String grados, String requisitos, String alumnoAsignado){
+    public Tfg(String idTfg, String departamento, String tutor, String titulo, String descripcion, ArrayList<String> grados, String requisitos, String alumnoAsignado){
         this.idTfg = idTfg;
         this.departamento = departamento;
         this.tutor = tutor;
@@ -72,11 +72,11 @@ public class Tfg implements Serializable{
     public void setDescripcion(String descripcion) {
         this.descripcion=descripcion;
     }
-    public String getGrados() {
+    public ArrayList<String> getGrados() {
         return grados;
     }
 
-    public void setGrados(String grados) {
+    public void setGrados(ArrayList<String> grados) {
         this.grados=grados;
     }
     public String getRequisitos() {
