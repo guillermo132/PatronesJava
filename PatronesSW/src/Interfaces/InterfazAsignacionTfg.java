@@ -7,11 +7,14 @@ package Interfaces;
 import Clases.Tfg;
 import Clases.Usuario;
 import  Singleton.Serializa;
+import State.EstadoAsignado;
+import State.EstadoNoAsignado;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +27,8 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
      */
     private Serializa serializa;
     private Usuario nombreProfesor;
+    private ArrayList<Tfg> listaTFG = new ArrayList<>();
+    HashMap<String,Usuario> listaUsuarios = new HashMap<>();
     public InterfazAsignacionTfg(Usuario nombreProfesor, Serializa serializa) {
         initComponents();
         this.serializa = serializa;
@@ -49,6 +54,7 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,27 +78,37 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 48)); // NOI18N
         jLabel3.setText("->");
 
+        jButton2.setText("Desasignar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addComponent(jLabel1)
+                .addGap(204, 204, 204)
+                .addComponent(jLabel2)
+                .addContainerGap(233, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(jLabel1)
-                        .addGap(204, 204, 204)
-                        .addComponent(jLabel2)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
+                        .addComponent(jButton1)))
+                .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,19 +117,23 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(226, 226, 226))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(223, 223, 223))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(41, 41, 41))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(223, 223, 223))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(jButton1)
+                        .addGap(76, 76, 76)
+                        .addComponent(jButton2))))
         );
 
         pack();
@@ -121,15 +141,71 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+        try{
+            String key1 = jList1.getSelectedValue();//Titulo Tfg
+            String key2 = jList2.getSelectedValue();//nombreUsuario
+            Tfg tfgSeleccionado = null;
+            for(int x=0;x<listaTFG.size();x++) {
+                if(listaTFG.get(x).getTitulo().equals(key1)){
+                    tfgSeleccionado = listaTFG.get(x);
+                }
+            }
+            Usuario usuarioSeleccionado = listaUsuarios.get(key2);
+            
+            if(usuarioSeleccionado.getAsignado()==false && tfgSeleccionado.getAsignado()==false){
+                usuarioSeleccionado.setAsignado(new EstadoAsignado().estado());
+                tfgSeleccionado.setAsignado(new EstadoAsignado().estado());
+                serializa.GuardarTfg(tfgSeleccionado);
+                serializa.GuardarCliente(key2, usuarioSeleccionado);
+            }
+            else{
+               JOptionPane.showMessageDialog(this,"El alumno / TFG ya han sido previamente asignados!"); 
+            }
+            
+            
+            
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Selecciona un tfg y un alumno para realizar la asignación."); 
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try{
+            String key1 = jList1.getSelectedValue();//Titulo Tfg
+            String key2 = jList2.getSelectedValue();//nombreUsuario
+            Tfg tfgSeleccionado = null;
+            for(int x=0;x<listaTFG.size();x++) {
+                if(listaTFG.get(x).getTitulo().equals(key1)){
+                    tfgSeleccionado = listaTFG.get(x);
+                }
+            }
+            Usuario usuarioSeleccionado = listaUsuarios.get(key2);
+            
+            if(usuarioSeleccionado.getAsignado()==true && tfgSeleccionado.getAsignado()==true){
+            
+            usuarioSeleccionado.setAsignado(new EstadoNoAsignado().estado());
+            tfgSeleccionado.setAsignado(new EstadoNoAsignado().estado());
+            serializa.GuardarTfg(tfgSeleccionado);
+            serializa.GuardarCliente(key2, usuarioSeleccionado);
+            }else{
+               JOptionPane.showMessageDialog(this,"El alumno / TFG ya han sido previamente asignados!"); 
+            }
+            
+            
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Selecciona un tfg y un alumno para realizar la asignación."); 
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     
     
     public void cargaDatosListaTfg(){
         DefaultListModel listModel = new DefaultListModel();
-        ArrayList<Tfg> listaTFG = new ArrayList<>();
+        
         listaTFG = serializa.CargarTfg();
         Iterator<Tfg> it = listaTFG.iterator();
         while (it.hasNext()){
@@ -143,7 +219,7 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
     
     public void cargarListaAlumnos(){
         DefaultListModel listModel = new DefaultListModel();
-        HashMap<String,Usuario> listaUsuarios = new HashMap<>();
+        
         listaUsuarios = serializa.CargarClientes();
         Iterator it = listaUsuarios.keySet().iterator();
         while (it.hasNext()){
@@ -160,6 +236,7 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

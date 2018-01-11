@@ -15,8 +15,9 @@ import java.io.Serializable;
  * @author joserra
  */
 public class EstadoAsignado implements Estado, Serializable{
+
     @Override
-    public void estado(Tfg tfg, Usuario user, InterfazAsignacionTfg intTfg){
-        
+    public boolean estado(){
+        return true;
     }
 }

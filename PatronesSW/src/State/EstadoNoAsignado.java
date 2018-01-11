@@ -16,7 +16,7 @@ import java.io.Serializable;
  */
 public class EstadoNoAsignado implements Estado, Serializable{
     @Override
-    public void estado(Tfg tfg, Usuario user, InterfazAsignacionTfg intTfg){
-        
+    public boolean estado(){
+        return false;
     }
 }

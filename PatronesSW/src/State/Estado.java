@@ -14,5 +14,5 @@ import Interfaces.InterfazAsignacionTfg;
  * @author joserra
  */
 public interface Estado {
-    public void estado(Tfg tfg, Usuario user, InterfazAsignacionTfg intTfg);
+    public boolean estado();
 }
