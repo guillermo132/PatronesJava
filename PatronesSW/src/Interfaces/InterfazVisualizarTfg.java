@@ -133,6 +133,11 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
         jLabel6.setText("Descripcion:");
 
         jButton3.setText("Atras");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Imprimir TFG");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -287,6 +292,23 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.inicializarDatos(iterator.anterior());
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if(this.user.getProfesor()){
+            InterfazProfesor ip = new InterfazProfesor(this.user, this.serializa);
+            this.setVisible(false);
+            ip.setVisible(true); 
+        }else if(this.user.getNombreUsuario().equals("admin")){
+            InterfazAdmin ip = new InterfazAdmin(this.user, this.serializa);
+            this.setVisible(false);
+            ip.setVisible(true); 
+        }else{
+            InterfazUser ip = new InterfazUser(this.user, this.serializa);
+            this.setVisible(false);
+            ip.setVisible(true); 
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

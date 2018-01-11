@@ -7,12 +7,13 @@ package Clases;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  *
  * @author joserra
  */
-public class Usuario implements Serializable{
+public class Usuario extends Observable implements Serializable{
     //Atributos
     String nombre;
     String apellidos;
@@ -22,8 +23,9 @@ public class Usuario implements Serializable{
     String clave;
     boolean profesor = false;
     boolean invitado = false;
-    ArrayList<String> listaTfg = new ArrayList<String>();
+    ArrayList<Tfg> listaTfg = new ArrayList<Tfg>();
     boolean asignado = false;
+    Usuario profesorFavorito;
     //Constructor
     public Usuario(String nombre, String apellidos, String NIF, String nombreUsuario, String clave, boolean profesor){
         this.nombre=nombre;
@@ -33,6 +35,7 @@ public class Usuario implements Serializable{
         this.clave=clave;
         this.profesor = profesor;
     }
+    
     public Usuario(String nombre, String clave){
         this.nombre = nombre;
         this.clave = clave;
@@ -85,16 +88,18 @@ public class Usuario implements Serializable{
         return this.profesor;
     }
     
-    public boolean setTfg(String tfg){
+    public boolean setTfg(Tfg tfg){
         if(this.listaTfg.size() == 5 || !this.profesor){
             return false;
         }else{
             this.listaTfg.add(tfg);
+            setChanged();
+            notifyObservers();
             return true;
         }
     }
     
-    public ArrayList<String> getTfg(){
+    public ArrayList<Tfg> getTfg(){
         return this.listaTfg;
     }
     public boolean getInvitado(){
@@ -109,7 +114,14 @@ public class Usuario implements Serializable{
     public boolean getAsignado(){
         return asignado;
     }
-    
+    public void setProfesorFavorito(Usuario user){
+        if(!this.profesor){
+            this.profesorFavorito = user;
+        }
+    }
+    public Usuario getProfesorFavorito(){
+        return this.profesorFavorito;
+    }
     
     
 }

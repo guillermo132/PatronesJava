@@ -144,7 +144,8 @@ public class InicioSesion extends javax.swing.JFrame {
          
             //Miramos a ver si Usuario es "admin" y Contraseña es "admin" y si lo es, vamos a la interfaz del administrador
             if ((usuario.equals("admin")) && (password.equals("admin"))){
-                InterfazAdmin ia = new InterfazAdmin(serializa);
+                Usuario admin = new Usuario("","","00000000-J","admin", "admin", false);
+                InterfazAdmin ia = new InterfazAdmin(admin, serializa);
                 ia.setVisible(true);
                 this.setVisible(false);
             }

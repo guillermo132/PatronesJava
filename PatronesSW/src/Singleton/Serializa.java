@@ -66,7 +66,11 @@ public class Serializa {
     
     public void GuardarCliente(String correo, Usuario u){
         try{
-            tablaUsuarios.put(correo, u);
+            if(tablaUsuarios.containsKey(correo)){
+                tablaUsuarios.replace(correo, u);
+            }else{
+               tablaUsuarios.put(correo, u); 
+            }
             FileOutputStream fos=new FileOutputStream("usuarios.txt");
             ObjectOutputStream oos=new ObjectOutputStream(fos);
             /*for (HashMap.Entry<String, Usuario> entry : tablaUsuarios.entrySet()) {
@@ -96,7 +100,15 @@ public class Serializa {
     
     public void GuardarTfg(Tfg tfg){
         try{
-            tfgs.add(tfg);
+            if(tfgs.contains(tfg)){
+                for(int i=0; i<tfgs.size();i++){
+                    if(tfgs.get(i).equals(tfg)){
+                        tfgs.set(i, tfg);
+                    }
+                }
+            }else{
+               tfgs.add(tfg); 
+            }
             FileOutputStream fos=new FileOutputStream("tfgs.txt");
             ObjectOutputStream oos=new ObjectOutputStream(fos);
             oos.writeObject(tfgs);

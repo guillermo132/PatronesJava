@@ -61,6 +61,7 @@ public class InterfazRegistrarTfg extends javax.swing.JFrame {
         campoDescripcion = new javax.swing.JTextField();
         campoRequisitos = new javax.swing.JTextField();
         jComboBoxDepartamento = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,6 +104,13 @@ public class InterfazRegistrarTfg extends javax.swing.JFrame {
 
         jComboBoxDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arquitectura", "Automática", "Ciencias Biomédicas", "Ciencias Jurídicas", "Ciencias de la Educación", "Economía", "Electrónica", "Física", "Historia", "Medicina", "Química", "Ciencias de la Computación" }));
 
+        jButton2.setText("Atras");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,8 +139,10 @@ public class InterfazRegistrarTfg extends javax.swing.JFrame {
                             .addComponent(jComboBoxDepartamento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(61, 61, 61))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(258, 258, 258)
+                .addGap(148, 148, 148)
                 .addComponent(jButton1)
+                .addGap(123, 123, 123)
+                .addComponent(jButton2)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -165,7 +175,9 @@ public class InterfazRegistrarTfg extends javax.swing.JFrame {
                     .addComponent(campoRequisitos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
@@ -207,16 +219,24 @@ public class InterfazRegistrarTfg extends javax.swing.JFrame {
             idCorrecto = new IdTfgCorrecto(tfg);
             tfg.setIdTfg(idCorrecto.getIdTfgCorrecto());
             
+            user.setTfg(tfg);
+            
             //ponemos como clave el correo de manera que el nombre de usuario sea el correo
             serializa.GuardarTfg(tfg);
-            System.out.println("Tfg "+idTfg+" Guardado");
 
             //Nos lleva a la ventana principal
-            InterfazProfesor ip = new InterfazProfesor();
+            InterfazProfesor ip = new InterfazProfesor(this.user, this.serializa);
             this.setVisible(false);
             ip.setVisible(true); 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        InterfazProfesor ip = new InterfazProfesor(this.user, this.serializa);
+        this.setVisible(false);
+        ip.setVisible(true); 
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,6 +280,7 @@ public class InterfazRegistrarTfg extends javax.swing.JFrame {
     private javax.swing.JTextField campoTitulo;
     private javax.swing.JTextField campoTutor;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBoxDepartamento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
