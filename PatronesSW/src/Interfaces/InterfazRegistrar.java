@@ -53,15 +53,10 @@ public class InterfazRegistrar extends javax.swing.JFrame {
     public void guardaUsuario(Usuario u, String correo){
         
         HashMap<String, Usuario> compruebaDni = serializa.CargarClientes();
-        System.out.println("2");
-        System.out.println("3");
         Iterator it = compruebaDni.keySet().iterator();
-        System.out.println("4");
         while (it.hasNext()){
-            System.out.println("5");
             String key= (String) it.next();
-            Usuario ll = compruebaDni.get(key);
-            String nif = ll.getNIF();
+            String nif = compruebaDni.get(key).getNIF();
             if(!nif.equals(u.getNIF())){
                 serializa.GuardarCliente(correo, u);
                 
@@ -70,7 +65,7 @@ public class InterfazRegistrar extends javax.swing.JFrame {
                 this.setVisible(false);
                 ip.setVisible(true);
             }else{
-            JOptionPane.showMessageDialog(this,"Error, El usuario ya existe!");
+                JOptionPane.showMessageDialog(this,"Error, El usuario ya existe!");
             }
         }  
     }
