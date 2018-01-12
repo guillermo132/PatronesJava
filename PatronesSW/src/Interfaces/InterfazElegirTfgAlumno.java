@@ -24,7 +24,6 @@ public class InterfazElegirTfgAlumno extends javax.swing.JFrame {
      */
     Usuario c;
     private Serializa serializa;
-    Tfg tfg;
     private ArrayList<Tfg> listaTFG = new ArrayList<>();
     public InterfazElegirTfgAlumno() {
         initComponents();
@@ -38,6 +37,7 @@ public class InterfazElegirTfgAlumno extends javax.swing.JFrame {
         if(c.getInvitado()){
         }
         cargaDatosListaTfg();
+        cargarMisTfg();
     }
     
     public void cargaDatosListaTfg(){
@@ -49,6 +49,18 @@ public class InterfazElegirTfgAlumno extends javax.swing.JFrame {
             listModel.addElement(key.getTitulo());
         }
         jList1.setModel(listModel);
+    }
+    
+    public void cargarMisTfg(){
+        DefaultListModel listModel = new DefaultListModel();
+        listaTFG = serializa.CargarTfg();
+        for(int x=0;x<listaTFG.size();x++) {
+            
+            if(listaTFG.get(x).getAlumno().get(x).getNIF().equals(c.getNIF())){
+                listModel.addElement(listaTFG.get(x).getTitulo());
+            }
+        }
+        jList2.setModel(listModel);
     }
 
     /**
@@ -68,6 +80,10 @@ public class InterfazElegirTfgAlumno extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
+        jLabel3 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,17 +123,35 @@ public class InterfazElegirTfgAlumno extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        jLabel2.setText("Listado TFGs");
+        jLabel2.setText("Mis TFG seleccionados");
+
+        jScrollPane2.setViewportView(jList2);
+
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel3.setText("Listado TFGs");
+
+        jButton4.setText("Dejar de elegir TFG");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(46, 46, 46)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(jLabel2))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -131,35 +165,48 @@ public class InterfazElegirTfgAlumno extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(28, 28, 28)
                                         .addComponent(jButton2)))
-                                .addGap(23, 23, 23)))))
-                .addContainerGap(16, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(45, 45, 45)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(135, 135, 135))
+                                .addGap(23, 23, 23)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(72, 72, 72))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(109, 109, 109)
+                    .addComponent(jLabel3)
+                    .addContainerGap(617, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                .addGap(57, 57, 57)
                 .addComponent(jLabel2)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(jButton1)
-                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(75, 75, 75)
+                                .addComponent(jButton1))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton4)
+                        .addGap(23, 23, 23)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addGap(22, 22, 22))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(109, 109, 109)
+                    .addComponent(jLabel3)
+                    .addContainerGap(437, Short.MAX_VALUE)))
         );
 
         pack();
@@ -186,42 +233,31 @@ public class InterfazElegirTfgAlumno extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try{
-            System.out.println("1");
             String key1 = jList1.getSelectedValue();//Titulo Tfg
-            System.out.println("2");
             Tfg tfgSeleccionado = null;
-            System.out.println("3");
             for(int x=0;x<listaTFG.size();x++) {
                 if(listaTFG.get(x).getTitulo().equals(key1)){
                     tfgSeleccionado = listaTFG.get(x);
                 }
-            }//tengo el tfg
-            
-//            ArrayList<Usuario> listaUsuarios = new ArrayList<>();
-//            listaUsuarios = tfg.getAlumno();
-//            System.out.println("4");
-//            boolean baliza = false;
-//            for(int x=0;x<listaUsuarios.size();x++){
-//                if(listaUsuarios.get(x).getNombreUsuario().equals(c.getNombreUsuario())){
-//                    baliza = true;
-//                }
-//            }
-                    
-            
-//            if(baliza == false){ //si la lista de alumnos no tiene al alumno dentro
-                System.out.println("5");
+            }//tengo el tfg                    
+            ArrayList<Usuario> arrayUsuarios = tfgSeleccionado.getAlumno();
+            boolean baliza = false;
+            for(int x=0;x<arrayUsuarios.size();x++) {
+                if(arrayUsuarios.get(x).getNIF().equals(c.getNIF())){
+                    baliza = true;
+                }
+            }
+            if(baliza == false){ //si la lista de alumnos no tiene al alumno dentro
                 int choice =JOptionPane.showOptionDialog (this,"Desea seleccionar el TFG "+tfgSeleccionado.getIdTfg()+" como nueva elección?", "¿Seleccionar?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-                System.out.println("6");
                 if(choice == JOptionPane.YES_NO_OPTION){
-                    System.out.println("7");
-                    tfg.setAlumnno(c);
+                    tfgSeleccionado.setAlumnno(c);
                     serializa.GuardarTfg(tfgSeleccionado);
                     JOptionPane.showMessageDialog(this,"Has elegido el TFG "+tfgSeleccionado.getIdTfg());
                 }
-//            }
-//            else{
-//                JOptionPane.showMessageDialog(this,"Ya habias seleccionado previamente este tfg");
-//            }
+            }else{
+                JOptionPane.showMessageDialog(this,"Ya habias seleccionado previamente este tfg");
+            }
+            cargarMisTfg();
         }catch(Exception e){
             JOptionPane.showMessageDialog(this,"Selecciona un tfg para realizar la elección.");
         }
@@ -233,6 +269,11 @@ public class InterfazElegirTfgAlumno extends javax.swing.JFrame {
         this.setVisible(false);
         lt.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,10 +314,14 @@ public class InterfazElegirTfgAlumno extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

@@ -14,7 +14,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -45,6 +47,32 @@ public class InterfazRegistrar extends javax.swing.JFrame {
         }
        catch(IllegalComponentStateException e){}
        // CargarClientes();
+    }
+    
+    
+    public void guardaUsuario(Usuario u, String correo){
+        
+        HashMap<String, Usuario> compruebaDni = serializa.CargarClientes();
+        System.out.println("2");
+        System.out.println("3");
+        Iterator it = compruebaDni.keySet().iterator();
+        System.out.println("4");
+        while (it.hasNext()){
+            System.out.println("5");
+            String key= (String) it.next();
+            Usuario ll = compruebaDni.get(key);
+            String nif = ll.getNIF();
+            if(!nif.equals(u.getNIF())){
+                serializa.GuardarCliente(correo, u);
+                
+                //Nos lleva a la ventana principal
+                InterfazAdmin ip = new InterfazAdmin();
+                this.setVisible(false);
+                ip.setVisible(true);
+            }else{
+            JOptionPane.showMessageDialog(this,"Error, El usuario ya existe!");
+            }
+        }  
     }
 
     /**
@@ -243,15 +271,11 @@ public class InterfazRegistrar extends javax.swing.JFrame {
             }else{
                 profesor = false;
             }
+                
                 //Instanciamos un objeto, lo añadimos al HashMap y lo guardamos en el .dat
                 Usuario cl1 = new Usuario(nombre,apellidos,NIF,correo,contrasena, profesor);
-                //ponemos como clave el correo de manera que el nombre de usuario sea el correo
-                serializa.GuardarCliente(correo, cl1);
+                guardaUsuario(cl1, correo);
                 
-                //Nos lleva a la ventana principal
-                InterfazAdmin ip = new InterfazAdmin();
-                this.setVisible(false);
-                ip.setVisible(true); 
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
 
