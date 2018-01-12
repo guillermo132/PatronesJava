@@ -73,6 +73,11 @@ public class InterfazUser extends javax.swing.JFrame {
         jButtonAsignados.setText("Tus TFG Asignados");
 
         jButtonElecciones.setText("Mis elecciones");
+        jButtonElecciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEleccionesActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Elegir Profesor Favorito");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +103,7 @@ public class InterfazUser extends javax.swing.JFrame {
                     .addComponent(jButtonLista, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonElecciones, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                    .addComponent(jButtonElecciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(41, 41, 41))
         );
@@ -145,6 +150,13 @@ public class InterfazUser extends javax.swing.JFrame {
          this.setVisible(false);
          pfav.setVisible(true);   
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButtonEleccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEleccionesActionPerformed
+        // TODO add your handling code here:
+        InterfazElegirTfg etfg = new InterfazElegirTfg(this.c, this.serializa);
+        this.setVisible(false);
+        etfg.setVisible(true); 
+    }//GEN-LAST:event_jButtonEleccionesActionPerformed
 
     /**
      * @param args the command line arguments

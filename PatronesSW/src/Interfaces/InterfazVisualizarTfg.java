@@ -31,6 +31,7 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
     private PatronIterator iterator;
     private Tfg tfgActual;
     private Usuario user;
+    private Tfg tfg;
     private static Servidor proxy = new ProxyProteccion(new ImprimirFichero("MiServidor"));
     
     public InterfazVisualizarTfg() {
@@ -43,6 +44,36 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
         iterator = new PatronIterator(serializa.CargarTfg());
         this.tfgs = serializa.CargarTfg();
         inicializarDatos(0);
+    }
+    
+    public InterfazVisualizarTfg(Usuario user, Serializa serializa, Tfg tfg){
+        initComponents();
+        this.serializa = serializa;
+        this.user = user;
+        this.tfg=tfg;
+        jButton1.setVisible(false);
+        jButton2.setVisible(false);
+        jButton3.setVisible(false);
+        cargarDatosTfg(tfg);
+    }
+    
+    private void cargarDatosTfg(Tfg tfg){
+        this.textoTfg.setText(tfg.getIdTfg());
+        this.textoDpto.setText(tfg.getDepartamento());
+        this.textoTutor.setText(tfg.getTutor());
+        this.textoTitulo.setText(tfg.getTitulo());
+        this.textoRequisitos.setText(tfg.getRequisitos());
+        this.textoAlumnoAsignado.setText(tfg.getAlumnoAsignado());
+        this.textoDescripcion.setText(tfg.getDescripcion());
+        
+        DefaultListModel listModel = new DefaultListModel();
+        ArrayList<String> listaGrados = tfg.getGrados();
+        Iterator<String> it = listaGrados.iterator();
+        while (it.hasNext()){
+            String key= it.next();
+            listModel.addElement(key);  
+        }
+        jList1.setModel(listModel);
     }
   
     private void inicializarDatos(int numtfg){
@@ -210,11 +241,11 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(12, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
-                .addGap(130, 130, 130))
+                .addGap(56, 56, 56))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,9 +291,9 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
                         .addGap(117, 117, 117))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(25, 25, 25))))
         );
 
         pack();
