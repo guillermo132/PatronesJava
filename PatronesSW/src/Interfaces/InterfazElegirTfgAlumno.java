@@ -8,7 +8,6 @@ package Interfaces;
 import Clases.Tfg;
 import Clases.Usuario;
 import Singleton.Serializa;
-import State.EstadoAsignado;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
@@ -18,21 +17,20 @@ import javax.swing.JOptionPane;
  *
  * @author joserra
  */
-public class InterfazElegirTfg extends javax.swing.JPanel {
+public class InterfazElegirTfgAlumno extends javax.swing.JFrame {
 
     /**
-     * Creates new form InterfazElegirTfg
+     * Creates new form InterfazElegirTfgAlumno
      */
     Usuario c;
     private Serializa serializa;
     Tfg tfg;
     private ArrayList<Tfg> listaTFG = new ArrayList<>();
-    public InterfazElegirTfg() {
+    public InterfazElegirTfgAlumno() {
         initComponents();
     }
-
     
-    public InterfazElegirTfg(Usuario c, Serializa serializa){
+    public InterfazElegirTfgAlumno(Usuario c, Serializa serializa){
         initComponents();
         this.serializa = serializa;
         this.c = c;
@@ -42,10 +40,8 @@ public class InterfazElegirTfg extends javax.swing.JPanel {
         cargaDatosListaTfg();
     }
     
-    
     public void cargaDatosListaTfg(){
         DefaultListModel listModel = new DefaultListModel();
-        
         listaTFG = serializa.CargarTfg();
         Iterator<Tfg> it = listaTFG.iterator();
         while (it.hasNext()){
@@ -54,7 +50,7 @@ public class InterfazElegirTfg extends javax.swing.JPanel {
         }
         jList1.setModel(listModel);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -72,6 +68,8 @@ public class InterfazElegirTfg extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Usuario:");
         jLabel1.setToolTipText("");
@@ -111,8 +109,8 @@ public class InterfazElegirTfg extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel2.setText("Listado TFGs");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -134,7 +132,7 @@ public class InterfazElegirTfg extends javax.swing.JPanel {
                                         .addGap(28, 28, 28)
                                         .addComponent(jButton2)))
                                 .addGap(23, 23, 23)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -163,6 +161,8 @@ public class InterfazElegirTfg extends javax.swing.JPanel {
                 .addComponent(jButton3)
                 .addGap(22, 22, 22))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -171,7 +171,14 @@ public class InterfazElegirTfg extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        InterfazVisualizarTfg lt = new InterfazVisualizarTfg(this.c, this.serializa, this.tfg);
+        String key1 = jList1.getSelectedValue();
+        Tfg tfgSeleccionado = null;
+            for(int x=0;x<listaTFG.size();x++) {
+                if(listaTFG.get(x).getTitulo().equals(key1)){
+                    tfgSeleccionado = listaTFG.get(x);
+                }
+            }
+        InterfazVisualizarTfg lt = new InterfazVisualizarTfg(this.c, this.serializa, tfgSeleccionado);
         this.setVisible(false);
         lt.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -179,27 +186,44 @@ public class InterfazElegirTfg extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try{
+            System.out.println("1");
             String key1 = jList1.getSelectedValue();//Titulo Tfg
+            System.out.println("2");
             Tfg tfgSeleccionado = null;
+            System.out.println("3");
             for(int x=0;x<listaTFG.size();x++) {
                 if(listaTFG.get(x).getTitulo().equals(key1)){
                     tfgSeleccionado = listaTFG.get(x);
                 }
             }//tengo el tfg
             
-            if(!tfg.getAlumno().contains(c)){ //si la lista de alumnos no tiene al alumno dentro
+//            ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+//            listaUsuarios = tfg.getAlumno();
+//            System.out.println("4");
+//            boolean baliza = false;
+//            for(int x=0;x<listaUsuarios.size();x++){
+//                if(listaUsuarios.get(x).getNombreUsuario().equals(c.getNombreUsuario())){
+//                    baliza = true;
+//                }
+//            }
+                    
+            
+//            if(baliza == false){ //si la lista de alumnos no tiene al alumno dentro
+                System.out.println("5");
                 int choice =JOptionPane.showOptionDialog (this,"Desea seleccionar el TFG "+tfgSeleccionado.getIdTfg()+" como nueva elección?", "¿Seleccionar?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                System.out.println("6");
                 if(choice == JOptionPane.YES_NO_OPTION){
+                    System.out.println("7");
                     tfg.setAlumnno(c);
                     serializa.GuardarTfg(tfgSeleccionado);
                     JOptionPane.showMessageDialog(this,"Has elegido el TFG "+tfgSeleccionado.getIdTfg());
                 }
-            }
-            else{
-               JOptionPane.showMessageDialog(this,"Ya habias seleccionado previamente este tfg"); 
-            }
+//            }
+//            else{
+//                JOptionPane.showMessageDialog(this,"Ya habias seleccionado previamente este tfg");
+//            }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(this,"Selecciona un tfg para realizar la elección."); 
+            JOptionPane.showMessageDialog(this,"Selecciona un tfg para realizar la elección.");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -210,6 +234,40 @@ public class InterfazElegirTfg extends javax.swing.JPanel {
         lt.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(InterfazElegirTfgAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(InterfazElegirTfgAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(InterfazElegirTfgAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(InterfazElegirTfgAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new InterfazElegirTfgAlumno().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

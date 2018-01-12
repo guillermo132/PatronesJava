@@ -153,7 +153,7 @@ public class InterfazUser extends javax.swing.JFrame {
 
     private void jButtonEleccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEleccionesActionPerformed
         // TODO add your handling code here:
-        InterfazElegirTfg etfg = new InterfazElegirTfg(this.c, this.serializa);
+        InterfazElegirTfgAlumno etfg = new InterfazElegirTfgAlumno(this.c, this.serializa);
         this.setVisible(false);
         etfg.setVisible(true); 
     }//GEN-LAST:event_jButtonEleccionesActionPerformed

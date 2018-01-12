@@ -48,23 +48,27 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
     
     public InterfazVisualizarTfg(Usuario user, Serializa serializa, Tfg tfg){
         initComponents();
-        this.serializa = serializa;
+        try {
+            serializa = Serializa.getInstancia();
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(InterfazRegistrar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.user = user;
         this.tfg=tfg;
         jButton1.setVisible(false);
         jButton2.setVisible(false);
-        jButton3.setVisible(false);
+        jButton4.setVisible(false);
         cargarDatosTfg(tfg);
     }
     
     private void cargarDatosTfg(Tfg tfg){
-        this.textoTfg.setText(tfg.getIdTfg());
-        this.textoDpto.setText(tfg.getDepartamento());
-        this.textoTutor.setText(tfg.getTutor());
-        this.textoTitulo.setText(tfg.getTitulo());
-        this.textoRequisitos.setText(tfg.getRequisitos());
-        this.textoAlumnoAsignado.setText(tfg.getAlumnoAsignado());
-        this.textoDescripcion.setText(tfg.getDescripcion());
+        this.textoTfg.setText(this.tfg.getIdTfg());
+        this.textoDpto.setText(this.tfg.getDepartamento());
+        this.textoTutor.setText(this.tfg.getTutor());
+        this.textoTitulo.setText(this.tfg.getTitulo());
+        this.textoRequisitos.setText(this.tfg.getRequisitos());
+        this.textoAlumnoAsignado.setText(this.tfg.getAlumnoAsignado());
+        this.textoDescripcion.setText(this.tfg.getDescripcion());
         
         DefaultListModel listModel = new DefaultListModel();
         ArrayList<String> listaGrados = tfg.getGrados();
