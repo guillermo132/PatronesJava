@@ -109,11 +109,6 @@ public class Tfg implements Serializable{
     
     
     public void borraAlumno(String user){
-        System.out.println("1");
-        System.out.println("2");
         boolean borrado = this.listaPeticiones.remove(user);
-        System.out.println("3");
-        System.out.println(borrado);
-        System.out.println("5");
     }
 }

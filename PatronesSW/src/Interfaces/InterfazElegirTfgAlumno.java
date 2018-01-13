@@ -58,9 +58,11 @@ public final class InterfazElegirTfgAlumno extends javax.swing.JFrame {
         listaTFG = serializa.CargarTfg();
         for(int x=0;x<listaTFG.size();x++) {
             if(listaTFG.get(x).getAlumno().size()>0){
-                if(listaTFG.get(x).getAlumno().get(x).equals(c.getNombreUsuario())){
-                    listModel.addElement(listaTFG.get(x).getTitulo());
-                }
+                for(int i=0; i<listaTFG.get(x).getAlumno().size();i++){
+                    if(listaTFG.get(x).getAlumno().get(i).equals(c.getNombreUsuario())){
+                        listModel.addElement(listaTFG.get(x).getTitulo());
+                    }
+                } 
             }
         }
         jList2.setModel(listModel);
@@ -269,7 +271,7 @@ public final class InterfazElegirTfgAlumno extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        InterfazUser lt = new InterfazUser(c, serializa);
+        InterfazUser lt = new InterfazUser(this.c, this.serializa);
         this.setVisible(false);
         lt.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -296,7 +298,6 @@ public final class InterfazElegirTfgAlumno extends javax.swing.JFrame {
             if(baliza == true){ //si la lista de alumnos no tiene al alumno dentro
                 int choice =JOptionPane.showOptionDialog (this,"Desea deseleccionar el TFG "+tfgSeleccionado.getIdTfg()+" ?", "¿Seleccionar?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
                 if(choice == JOptionPane.YES_NO_OPTION){
-                    System.out.println(c.getNombreUsuario());
                     tfgSeleccionado.borraAlumno(c.getNombreUsuario());
                     serializa.GuardarTfg(tfgSeleccionado);
                     JOptionPane.showMessageDialog(this,"Has deseleccionado el TFG "+tfgSeleccionado.getIdTfg());

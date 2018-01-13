@@ -23,8 +23,7 @@ public class ObservadorConcreto implements java.util.Observer{
      * Constructor.
      *
      * @param nombre Nombre del observador.
-     * @param precio Precio al que queremos vender.
-     * @param numAcciones Cantidad de acciones.
+     * @param ventana
      * @param sujeto Sujeto al que observamos.
      */
     public ObservadorConcreto(String nombre, InterfazUser ventana, Usuario sujeto) {

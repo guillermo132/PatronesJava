@@ -10,10 +10,7 @@ import Singleton.Serializa;
 import Adapter.IdTfgCorrecto;
 import Clases.Usuario;
 import FactoryMethod.FactoriaDeGrados;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**

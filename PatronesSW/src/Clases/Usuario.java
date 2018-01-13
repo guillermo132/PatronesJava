@@ -15,17 +15,18 @@ import java.util.Observable;
  */
 public class Usuario extends Observable implements Serializable{
     //Atributos
-    String nombre;
-    String apellidos;
-    String NIF;
-    String tipoUsuario;
-    String nombreUsuario;
-    String clave;
-    boolean profesor = false;
-    boolean invitado = false;
-    ArrayList<Tfg> listaTfg = new ArrayList<Tfg>();
-    boolean asignado = false;
-    Usuario profesorFavorito;
+    private String nombre;
+    private String apellidos;
+    private String NIF;
+    private String tipoUsuario;
+    private String nombreUsuario;
+    private String clave;
+    private boolean profesor = false;
+    private boolean invitado = false;
+    private ArrayList<Tfg> listaTfg = new ArrayList<Tfg>();
+    private boolean asignado = false;
+    private Usuario profesorFavorito;
+    private double notaMedia;
     //Constructor
     public Usuario(String nombre, String apellidos, String NIF, String nombreUsuario, String clave, boolean profesor){
         this.nombre=nombre;
@@ -34,6 +35,15 @@ public class Usuario extends Observable implements Serializable{
         this.nombreUsuario=nombreUsuario;
         this.clave=clave;
         this.profesor = profesor;
+    }
+    public Usuario(String nombre, String apellidos, String NIF, String nombreUsuario, String clave,double notaMedia ,boolean profesor){
+        this.nombre=nombre;
+        this.apellidos=apellidos;
+        this.NIF=NIF;
+        this.nombreUsuario=nombreUsuario;
+        this.clave=clave;
+        this.profesor = profesor;
+        this.notaMedia = notaMedia;
     }
     
     public Usuario(String nombre, String clave){
@@ -121,6 +131,13 @@ public class Usuario extends Observable implements Serializable{
     }
     public Usuario getProfesorFavorito(){
         return this.profesorFavorito;
+    }
+    
+    public void setNotaMedia(float notaMedia){
+        this.notaMedia = notaMedia;
+    }
+    public double getNotaMedia(){
+        return this.notaMedia;
     }
     
     

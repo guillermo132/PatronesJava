@@ -5,8 +5,12 @@
  */
 package Interfaces;
 
+import Clases.Tfg;
 import Clases.Usuario;
 import Singleton.Serializa;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,6 +33,7 @@ public class InterfazUser extends javax.swing.JFrame {
       this.c = c;
       initComponents();
        this.jTextField1.setText("@"+c.getNombreUsuario());
+       this.jTextField2.setText(String.valueOf(this.c.getNotaMedia()));
        if(c.getInvitado()){
            this.jButtonAsignados.setEnabled(false);
            this.jButtonElecciones.setEnabled(false);
@@ -51,6 +56,8 @@ public class InterfazUser extends javax.swing.JFrame {
         jButtonElecciones = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         closeSession = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,7 +78,12 @@ public class InterfazUser extends javax.swing.JFrame {
             }
         });
 
-        jButtonAsignados.setText("Tus TFG Asignados");
+        jButtonAsignados.setText("Tu TFG Asignados");
+        jButtonAsignados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAsignadosActionPerformed(evt);
+            }
+        });
 
         jButtonElecciones.setText("Mis elecciones");
         jButtonElecciones.addActionListener(new java.awt.event.ActionListener() {
@@ -94,30 +106,44 @@ public class InterfazUser extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Nota Media:");
+
+        jTextField2.setText("jTextField2");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(169, 169, 169)
-                .addComponent(jLabel1)
-                .addGap(45, 45, 45)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonAsignados, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonLista, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonElecciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(41, 41, 41))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(closeSession)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonAsignados, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonLista, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonElecciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(41, 41, 41))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +151,9 @@ public class InterfazUser extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonLista, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -179,6 +207,38 @@ public class InterfazUser extends javax.swing.JFrame {
         ip.setVisible(true);
     }//GEN-LAST:event_closeSessionActionPerformed
 
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jButtonAsignadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAsignadosActionPerformed
+        // TODO add your handling code here:
+        if(serializa.CargarTfg().isEmpty()){
+            JOptionPane.showMessageDialog(this, "TODAVÍA NO HAY TFGS REGISTRADOS", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            if(this.c.getAsignado()){
+                Tfg myTfg = null;
+                ArrayList<Tfg> listaTFG = serializa.CargarTfg();
+                Iterator<Tfg> it = listaTFG.iterator();
+                System.out.println("While");
+                while (it.hasNext()){
+                    Tfg key= it.next();
+                    System.out.println(key.getTitulo()+" - "+key.getAlumnoAsignado());
+                    if(key.getAlumnoAsignado().equals(this.c.getNombreUsuario())){
+                        System.out.println(key.getAlumnoAsignado());
+                        myTfg = key;
+                    }
+                }
+                
+                InterfazVisualizarTfg lt = new InterfazVisualizarTfg(this.c, this.serializa, myTfg);
+                this.setVisible(false);
+                lt.setVisible(true);  
+            }else{
+                JOptionPane.showMessageDialog(this, "TODAVÍA NO SE TE HA ASIGNADO NINGÚN TFG", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+            } 
+        }
+    }//GEN-LAST:event_jButtonAsignadosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -221,6 +281,8 @@ public class InterfazUser extends javax.swing.JFrame {
     private javax.swing.JButton jButtonElecciones;
     private javax.swing.JButton jButtonLista;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

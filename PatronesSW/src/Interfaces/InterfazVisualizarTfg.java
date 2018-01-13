@@ -48,17 +48,13 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
     
     public InterfazVisualizarTfg(Usuario user, Serializa serializa, Tfg tfg){
         initComponents();
-        try {
-            serializa = Serializa.getInstancia();
-        } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(InterfazRegistrar.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.serializa = serializa;
         this.user = user;
         this.tfg=tfg;
         jButton1.setVisible(false);
         jButton2.setVisible(false);
         jButton4.setVisible(false);
-        cargarDatosTfg(tfg);
+        cargarDatosTfg(this.tfg);
     }
     
     private void cargarDatosTfg(Tfg tfg){

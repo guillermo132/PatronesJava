@@ -100,7 +100,13 @@ public class Serializa {
     
     public void GuardarTfg(Tfg tfg){
         try{
-            if(tfgs.contains(tfg)){
+            boolean esta = false;
+            for(int i=0; i< tfgs.size();i++){
+                if(tfgs.get(i).getIdTfg().equals(tfg.getIdTfg())){
+                    esta = true;
+                }
+            }
+            if(esta){
                 for(int i=0; i<tfgs.size();i++){
                     if(tfgs.get(i).equals(tfg)){
                         tfgs.set(i, tfg);

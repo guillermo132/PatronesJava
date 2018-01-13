@@ -7,19 +7,11 @@ package Interfaces;
 
 import Singleton.Serializa;
 import Clases.Usuario;
-import java.awt.IllegalComponentStateException;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.BorderFactory;
 
 /**
  *
@@ -31,22 +23,24 @@ public class InterfazRegistrar extends javax.swing.JFrame {
      * Creates new form InterfazRegistrar
      */
     //Creamos un HashMap de la clase Cliente llamado tablaClientes
-    Serializa serializa;
+    private Serializa serializa;
+    private Usuario admin;
     public InterfazRegistrar() {
         //Título de la ventana
         this.setTitle("Nuevo Registro");
-                
-        try{
         initComponents();
         NIFPersona.setText("00000000-A");
-           try {
-                serializa = Serializa.getInstancia();
-           } catch (IOException | ClassNotFoundException ex) {
-               Logger.getLogger(InterfazRegistrar.class.getName()).log(Level.SEVERE, null, ex);
-           }
-        }
-       catch(IllegalComponentStateException e){}
-       // CargarClientes();
+         
+    }
+    public InterfazRegistrar(Usuario user, Serializa serializa) {
+        //Título de la ventana
+        this.setTitle("Nuevo Registro");
+        initComponents();
+        this.jlabelNotaMedia.setVisible(false);
+        this.jTextFieldNotaMedia.setVisible(false);
+        NIFPersona.setText("00000000-A");
+        this.admin = user;
+        this.serializa = serializa;
     }
     
     
@@ -54,20 +48,31 @@ public class InterfazRegistrar extends javax.swing.JFrame {
         
         HashMap<String, Usuario> compruebaDni = serializa.CargarClientes();
         Iterator it = compruebaDni.keySet().iterator();
+        boolean checkNif = false, checkNameUser = false;
         while (it.hasNext()){
             String key= (String) it.next();
             String nif = compruebaDni.get(key).getNIF();
-            if(!nif.equals(u.getNIF())){
-                serializa.GuardarCliente(correo, u);
-                
-                //Nos lleva a la ventana principal
-                InterfazAdmin ip = new InterfazAdmin();
-                this.setVisible(false);
-                ip.setVisible(true);
-            }else{
-                JOptionPane.showMessageDialog(this,"Error, El usuario ya existe!");
+            String nombreUser = compruebaDni.get(key).getNombreUsuario();
+            if(nif.equals(u.getNIF())){
+                checkNif = true;
+                this.NIFPersona.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+                this.NIFPersona.setForeground(Color.RED);
+                JOptionPane.showMessageDialog(this,"Ya existe un usuario con ese DNI","¡ATENCIÓN!",JOptionPane.WARNING_MESSAGE);
             }
-        }  
+            if(nombreUser.equals(u.getNombreUsuario())){
+                checkNameUser = true;
+                this.nombreUsuario.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+                this.nombreUsuario.setForeground(Color.RED);
+                JOptionPane.showMessageDialog(this,"Ya existe ese nombre usuario","¡ATENCIÓN!",JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        if(!checkNif && !checkNameUser){
+            serializa.GuardarCliente(correo, u);    
+                //Nos lleva a la ventana principal
+            InterfazAdmin ip = new InterfazAdmin(this.admin, this.serializa);
+            this.setVisible(false);
+            ip.setVisible(true);
+        }
     }
 
     /**
@@ -96,6 +101,8 @@ public class InterfazRegistrar extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         checkProfesor = new javax.swing.JRadioButton();
         checkAlumno = new javax.swing.JRadioButton();
+        jlabelNotaMedia = new javax.swing.JLabel();
+        jTextFieldNotaMedia = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,6 +123,12 @@ public class InterfazRegistrar extends javax.swing.JFrame {
         }
 
         jLabel6.setText("Nombre de Usuario:");
+
+        nombreUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreUsuarioActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("Contraseña:");
 
@@ -152,6 +165,8 @@ public class InterfazRegistrar extends javax.swing.JFrame {
             }
         });
 
+        jlabelNotaMedia.setText("Nota Media:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,57 +178,57 @@ public class InterfazRegistrar extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(102, 102, 102)
-                                .addComponent(jLabel8)
+                                .addComponent(NIFPersona)
+                                .addGap(77, 77, 77))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(nombrePersona, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(contraseñaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(apellidosPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(NIFPersona)
-                                        .addGap(77, 77, 77))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(nombrePersona, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)))
-                                .addGap(40, 40, 40)
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(checkProfesor)
+                                .addGap(18, 18, 18)
+                                .addComponent(checkAlumno))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addComponent(jLabel1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(contraseñaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(apellidosPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(checkProfesor)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(checkAlumno))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(103, 103, 103)
-                                .addComponent(jLabel1)))
-                        .addContainerGap(41, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(54, 54, 54)
+                        .addComponent(jlabelNotaMedia)
                         .addGap(18, 18, 18)
-                        .addComponent(nombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(185, 185, 185))))
+                        .addComponent(jTextFieldNotaMedia, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(botonAtras)
-                        .addGap(29, 29, 29))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(botonRegistrar)
-                        .addGap(301, 301, 301))))
+                .addComponent(botonRegistrar)
+                .addGap(301, 301, 301))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonAtras)
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -227,19 +242,26 @@ public class InterfazRegistrar extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(checkProfesor)
                     .addComponent(checkAlumno))
-                .addGap(45, 45, 45)
+                .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(nombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(contraseñaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(nombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlabelNotaMedia)
+                            .addComponent(jTextFieldNotaMedia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(contraseñaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))))
+                .addGap(13, 13, 13)
                 .addComponent(botonRegistrar)
-                .addGap(16, 16, 16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonAtras)
-                .addContainerGap())
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -255,6 +277,7 @@ public class InterfazRegistrar extends javax.swing.JFrame {
         }
         else{    
             //Declaramos variables
+            Usuario cl1 = null;
             String nombre = nombrePersona.getText();
             String apellidos = apellidosPersona.getText();
             String NIF = NIFPersona.getText();
@@ -263,32 +286,70 @@ public class InterfazRegistrar extends javax.swing.JFrame {
             boolean profesor;
             if(checkProfesor.isSelected()){
                 profesor = true;
+                //Instanciamos un objeto, lo añadimos al HashMap y lo guardamos en el .dat
+                cl1 = new Usuario(nombre,apellidos,NIF,correo,contrasena, profesor);
             }else{
                 profesor = false;
+                if(isValidDouble(this.jTextFieldNotaMedia.getText())){
+                   double notaMedia = Double.parseDouble(this.jTextFieldNotaMedia.getText());
+                   if(notaMedia>=0 && notaMedia<=10){
+                       //Instanciamos un objeto, lo añadimos al HashMap y lo guardamos en el .dat
+                        cl1 = new Usuario(nombre,apellidos,NIF,correo,contrasena,notaMedia, profesor);  
+                   }else{
+                      this.jTextFieldNotaMedia.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+                        this.jTextFieldNotaMedia.setForeground(Color.RED);
+                        JOptionPane.showMessageDialog(this,"Introduzca un número entre 0 y 10","¡ATENCIÓN!",JOptionPane.WARNING_MESSAGE);
+                        return; 
+                   } 
+                }else{
+                    this.jTextFieldNotaMedia.setBorder(BorderFactory.createLineBorder(Color.RED, 3));
+                    this.jTextFieldNotaMedia.setForeground(Color.RED);
+                    JOptionPane.showMessageDialog(this,"La nota media no es un numero","¡ATENCIÓN!",JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                
             }
                 
-                //Instanciamos un objeto, lo añadimos al HashMap y lo guardamos en el .dat
-                Usuario cl1 = new Usuario(nombre,apellidos,NIF,correo,contrasena, profesor);
+                
                 guardaUsuario(cl1, correo);
                 
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
+    private static boolean isValidDouble(String s) {
+        boolean isValid = true;
 
+        try {
+            Double.parseDouble(s);
+        } catch(NumberFormatException nfe) {
+            isValid = false;
+        }
+
+        return isValid;
+    }
+    
     private void botonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtrasActionPerformed
         // TODO add your handling code here:
         //Nos lleva a la ventana principal
-        InterfazAdmin ip = new InterfazAdmin();
+        InterfazAdmin ip = new InterfazAdmin(this.admin, this.serializa);
         this.setVisible(false);
         ip.setVisible(true);
     }//GEN-LAST:event_botonAtrasActionPerformed
 
     private void checkProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkProfesorActionPerformed
         // TODO add your handling code here:
+        this.jlabelNotaMedia.setVisible(false);
+        this.jTextFieldNotaMedia.setVisible(false);
     }//GEN-LAST:event_checkProfesorActionPerformed
 
     private void checkAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAlumnoActionPerformed
         // TODO add your handling code here:
+        this.jlabelNotaMedia.setVisible(true);
+        this.jTextFieldNotaMedia.setVisible(true);
     }//GEN-LAST:event_checkAlumnoActionPerformed
+
+    private void nombreUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreUsuarioActionPerformed
     //Metodo para guardar los clientes en un .dat
     
     
@@ -314,6 +375,8 @@ public class InterfazRegistrar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JTextField jTextFieldNotaMedia;
+    private javax.swing.JLabel jlabelNotaMedia;
     private javax.swing.JTextField nombrePersona;
     private javax.swing.JTextField nombreUsuario;
     // End of variables declaration//GEN-END:variables

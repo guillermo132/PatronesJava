@@ -29,10 +29,6 @@ public class InterfazAdmin extends javax.swing.JFrame {
         this.serializa = serializa;
         initComponents();
     }
-    
-    InterfazAdmin(InicioSesion aThis) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,6 +58,11 @@ public class InterfazAdmin extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(51, 255, 0));
         jButton2.setText("Asignar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Lista Alumnos Prioridad TFG"); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -161,14 +162,24 @@ public class InterfazAdmin extends javax.swing.JFrame {
 
     private void AltaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AltaUsuarioActionPerformed
         // TODO add your handling code here:
-        InterfazRegistrar ir = new InterfazRegistrar();
+        InterfazRegistrar ir = new InterfazRegistrar(this.user, this.serializa);
         this.setVisible(false);
         ir.setVisible(true);
     }//GEN-LAST:event_AltaUsuarioActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        InterfazPrioridad ag = new InterfazPrioridad(this.user, this.serializa);
+        this.setVisible(false);
+        ag.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        InterfazAsignacionTfg ag = new InterfazAsignacionTfg(this.user, this.serializa);
+        this.setVisible(false);
+        ag.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
