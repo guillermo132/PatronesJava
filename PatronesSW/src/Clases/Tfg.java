@@ -22,7 +22,7 @@ public class Tfg implements Serializable{
     private ArrayList<String> grados;
     private String requisitos;
     private String alumnoAsignado;
-    private ArrayList<Usuario> listaPeticiones;
+    private ArrayList<String> listaPeticiones;
     private boolean asignado = false;
     
     public Tfg(String idTfg, String departamento, String tutor, String titulo, String descripcion, ArrayList<String> grados, String requisitos, String alumnoAsignado){
@@ -34,7 +34,7 @@ public class Tfg implements Serializable{
         this.grados = grados;
         this.requisitos = requisitos;
         this.alumnoAsignado = alumnoAsignado;
-        this.listaPeticiones = new ArrayList<Usuario>();
+        this.listaPeticiones = new ArrayList<String>();
     }
     
     public String getIdTfg() {
@@ -94,10 +94,10 @@ public class Tfg implements Serializable{
     public void setAlumnoAsignado(String alumnoAsignado) {
         this.alumnoAsignado=alumnoAsignado;
     }
-    public void setAlumnno(Usuario user){
+    public void setAlumnno(String user){
         this.listaPeticiones.add(user);
     }
-    public ArrayList<Usuario> getAlumno(){
+    public ArrayList<String> getAlumno(){
         return this.listaPeticiones;
     }
     public void setAsignado(boolean asignado){
@@ -105,5 +105,15 @@ public class Tfg implements Serializable{
     }
     public boolean getAsignado(){
         return asignado;
+    }
+    
+    
+    public void borraAlumno(String user){
+        System.out.println("1");
+        System.out.println("2");
+        boolean borrado = this.listaPeticiones.remove(user);
+        System.out.println("3");
+        System.out.println(borrado);
+        System.out.println("5");
     }
 }

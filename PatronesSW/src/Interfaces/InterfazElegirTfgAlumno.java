@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author joserra
  */
-public class InterfazElegirTfgAlumno extends javax.swing.JFrame {
+public final class InterfazElegirTfgAlumno extends javax.swing.JFrame {
 
     /**
      * Creates new form InterfazElegirTfgAlumno
@@ -44,20 +44,23 @@ public class InterfazElegirTfgAlumno extends javax.swing.JFrame {
         DefaultListModel listModel = new DefaultListModel();
         listaTFG = serializa.CargarTfg();
         Iterator<Tfg> it = listaTFG.iterator();
+        
         while (it.hasNext()){
             Tfg key= it.next();
             listModel.addElement(key.getTitulo());
         }
         jList1.setModel(listModel);
+        
     }
     
     public void cargarMisTfg(){
         DefaultListModel listModel = new DefaultListModel();
         listaTFG = serializa.CargarTfg();
         for(int x=0;x<listaTFG.size();x++) {
-            
-            if(listaTFG.get(x).getAlumno().get(x).getNIF().equals(c.getNIF())){
-                listModel.addElement(listaTFG.get(x).getTitulo());
+            if(listaTFG.get(x).getAlumno().size()>0){
+                if(listaTFG.get(x).getAlumno().get(x).equals(c.getNombreUsuario())){
+                    listModel.addElement(listaTFG.get(x).getTitulo());
+                }
             }
         }
         jList2.setModel(listModel);
@@ -233,6 +236,7 @@ public class InterfazElegirTfgAlumno extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try{
+            listaTFG = serializa.CargarTfg();
             String key1 = jList1.getSelectedValue();//Titulo Tfg
             Tfg tfgSeleccionado = null;
             for(int x=0;x<listaTFG.size();x++) {
@@ -240,17 +244,17 @@ public class InterfazElegirTfgAlumno extends javax.swing.JFrame {
                     tfgSeleccionado = listaTFG.get(x);
                 }
             }//tengo el tfg                    
-            ArrayList<Usuario> arrayUsuarios = tfgSeleccionado.getAlumno();
+            ArrayList<String> arrayUsuarios = tfgSeleccionado.getAlumno();
             boolean baliza = false;
             for(int x=0;x<arrayUsuarios.size();x++) {
-                if(arrayUsuarios.get(x).getNIF().equals(c.getNIF())){
+                if(arrayUsuarios.get(x).equals(c.getNombreUsuario())){
                     baliza = true;
                 }
             }
             if(baliza == false){ //si la lista de alumnos no tiene al alumno dentro
                 int choice =JOptionPane.showOptionDialog (this,"Desea seleccionar el TFG "+tfgSeleccionado.getIdTfg()+" como nueva elección?", "¿Seleccionar?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
                 if(choice == JOptionPane.YES_NO_OPTION){
-                    tfgSeleccionado.setAlumnno(c);
+                    tfgSeleccionado.setAlumnno(c.getNombreUsuario());
                     serializa.GuardarTfg(tfgSeleccionado);
                     JOptionPane.showMessageDialog(this,"Has elegido el TFG "+tfgSeleccionado.getIdTfg());
                 }
@@ -272,7 +276,36 @@ public class InterfazElegirTfgAlumno extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        
+        try{
+            listaTFG = serializa.CargarTfg();
+            String key = jList2.getSelectedValue();//Titulo Tfg
+            Tfg tfgSeleccionado = null;
+            for(int x=0;x<listaTFG.size();x++) {
+                if(listaTFG.get(x).getTitulo().equals(key)){
+                    tfgSeleccionado = listaTFG.get(x);
+                }
+            }//tengo el tfg        
+            
+            ArrayList<String> arrayUsuarios = tfgSeleccionado.getAlumno();
+            boolean baliza = true;
+            for(int x=0;x<arrayUsuarios.size();x++) {
+                if(!arrayUsuarios.get(x).equals(c.getNombreUsuario())){
+                    baliza = false;
+                }
+            }
+            if(baliza == true){ //si la lista de alumnos no tiene al alumno dentro
+                int choice =JOptionPane.showOptionDialog (this,"Desea deseleccionar el TFG "+tfgSeleccionado.getIdTfg()+" ?", "¿Seleccionar?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                if(choice == JOptionPane.YES_NO_OPTION){
+                    System.out.println(c.getNombreUsuario());
+                    tfgSeleccionado.borraAlumno(c.getNombreUsuario());
+                    serializa.GuardarTfg(tfgSeleccionado);
+                    JOptionPane.showMessageDialog(this,"Has deseleccionado el TFG "+tfgSeleccionado.getIdTfg());
+                }
+            }
+            cargarMisTfg();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Selecciona un tfg para deshacer la elección.");
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
