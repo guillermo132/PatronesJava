@@ -69,6 +69,11 @@ public class InterfazProfesor extends javax.swing.JFrame {
         });
 
         jButton2.setText("TFG Ofertados");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Registrar TFG");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -180,6 +185,13 @@ public class InterfazProfesor extends javax.swing.JFrame {
         this.setVisible(false);
         ip.setVisible(true);
     }//GEN-LAST:event_closeSessionActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        InterfazTfgOfertadosProfesor itop = new InterfazTfgOfertadosProfesor(this.u, this.serializa);
+        this.setVisible(false);
+        itop.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
