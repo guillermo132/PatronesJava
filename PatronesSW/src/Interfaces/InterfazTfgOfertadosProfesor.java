@@ -11,6 +11,7 @@ import Singleton.Serializa;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -111,16 +112,20 @@ public class InterfazTfgOfertadosProfesor extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String key1 = jList1.getSelectedValue();
-        Tfg tfgSeleccionado = null;
-            for(int x=0;x<listaTFG.size();x++) {
-                if(listaTFG.get(x).getTitulo().equals(key1)){
-                    tfgSeleccionado = listaTFG.get(x);
+        try{
+            String key1 = jList1.getSelectedValue();
+            Tfg tfgSeleccionado = null;
+                for(int x=0;x<listaTFG.size();x++) {
+                    if(listaTFG.get(x).getTitulo().equals(key1)){
+                        tfgSeleccionado = listaTFG.get(x);
+                    }
                 }
-            }
-        InterfazVisualizarTfg lt = new InterfazVisualizarTfg(this.nombreProfesor, this.serializa, tfgSeleccionado);
-        this.setVisible(false);
-        lt.setVisible(true);
+            InterfazVisualizarTfg lt = new InterfazVisualizarTfg(this.nombreProfesor, this.serializa, tfgSeleccionado);
+            this.setVisible(false);
+            lt.setVisible(true);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this,"No hay TFG seleccionado."); 
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
