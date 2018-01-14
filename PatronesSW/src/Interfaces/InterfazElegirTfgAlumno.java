@@ -23,7 +23,7 @@ public class InterfazElegirTfgAlumno extends javax.swing.JFrame {
     /**
      * Creates new form InterfazElegirTfgAlumno
      */
-    Usuario c;
+    private Usuario c;
     private Serializa serializa;
     private ArrayList<Tfg> listaTFG = new ArrayList<>();
     public InterfazElegirTfgAlumno() {

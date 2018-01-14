@@ -170,7 +170,6 @@ public class InterfazPrioridad extends javax.swing.JFrame {
                 if(choice == JOptionPane.YES_NO_OPTION){
                     usuarioSeleccionado.setAsignado(new EstadoAsignado().estado());
                     tfgSeleccionado.setAsignado(new EstadoAsignado().estado());
-                    System.out.println("Asigno: "+usuarioSeleccionado.getNombreUsuario());
                     tfgSeleccionado.setAlumnoAsignado(usuarioSeleccionado.getNombreUsuario());
                     serializa.GuardarTfg(tfgSeleccionado);
                     serializa.GuardarCliente(key2, usuarioSeleccionado);
@@ -220,8 +219,7 @@ public class InterfazPrioridad extends javax.swing.JFrame {
             }
         });
         for(int i=0; i<notaMedia.size();i++){
-            System.out.println(notaMedia.get(i).getNombreUsuario() +" - " + notaMedia.get(i).getNotaMedia() );
-            listModel.addElement(notaMedia.get(i).getNombreUsuario());
+            listModel.addElement(notaMedia.get(i).getNombreUsuario() + " -> " + notaMedia.get(i).getNotaMedia());
         }
         jList1.setModel(listModel);
     }
