@@ -246,20 +246,27 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        cargaDatosListaTfg();
+        //cogemos alumno seleccionado y se lo pasamos
+        String key2 = jList2.getSelectedValue();//nombreUsuario
+        cargaDatosListaTfg(key2);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     
     
-    public void cargaDatosListaTfg(){
+    public void cargaDatosListaTfg(String nombreUsuario){
+        
         DefaultListModel listModel = new DefaultListModel();
+        ArrayList<String> listaAlumnos;
         
         listaTFG = serializa.CargarTfg();
         Iterator<Tfg> it = listaTFG.iterator();
         while (it.hasNext()){
             Tfg key= it.next();
             if(nombreProfesor.getNombre().equals(key.getTutor()) ){
-                listModel.addElement(key.getTitulo());
+                listaAlumnos = key.getAlumno();
+                if(listaAlumnos.contains(nombreUsuario)){
+                    listModel.addElement(key.getTitulo());
+                }
             }
         }
         jList1.setModel(listModel);
