@@ -11,13 +11,14 @@ import Singleton.Serializa;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author joserra
  */
-public final class InterfazElegirTfgAlumno extends javax.swing.JFrame {
+public class InterfazElegirTfgAlumno extends javax.swing.JFrame {
 
     /**
      * Creates new form InterfazElegirTfgAlumno
@@ -220,7 +221,9 @@ public final class InterfazElegirTfgAlumno extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-
+    private JFrame getFrame(){
+        return this;
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try{
@@ -231,7 +234,15 @@ public final class InterfazElegirTfgAlumno extends javax.swing.JFrame {
                         tfgSeleccionado = listaTFG.get(x);
                     }
                 }
-            InterfazVisualizarTfg lt = new InterfazVisualizarTfg(this.c, this.serializa, tfgSeleccionado);
+            InterfazVisualizarTfg lt = new InterfazVisualizarTfg(this.c, this.serializa, tfgSeleccionado){
+                @Override
+                public void dispose(){
+                    //Hacemos visible la principal
+                    getFrame().setVisible(true);
+                    //Cerramos
+                    super.dispose();
+                }
+            };
             this.setVisible(false);
             lt.setVisible(true);
         }catch(Exception e){
@@ -275,9 +286,10 @@ public final class InterfazElegirTfgAlumno extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        InterfazUser lt = new InterfazUser(this.c, this.serializa);
-        this.setVisible(false);
-        lt.setVisible(true);
+//        InterfazUser lt = new InterfazUser(this.c, this.serializa);
+//        this.setVisible(false);
+//        lt.setVisible(true);
+        dispose(); 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

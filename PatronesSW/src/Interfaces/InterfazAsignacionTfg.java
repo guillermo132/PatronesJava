@@ -232,16 +232,16 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if(this.nombreProfesor.getNombreUsuario().equals("admin")){
-            InterfazAdmin ia = new InterfazAdmin(this.nombreProfesor, this.serializa);
-            this.setVisible(false);
-            ia.setVisible(true);
-        }else{
-            InterfazProfesor ia = new InterfazProfesor(this.nombreProfesor, this.serializa);
-            this.setVisible(false);
-            ia.setVisible(true); 
-        }
-        
+//        if(this.nombreProfesor.getNombreUsuario().equals("admin")){
+//            InterfazAdmin ia = new InterfazAdmin(this.nombreProfesor, this.serializa);
+//            this.setVisible(false);
+//            ia.setVisible(true);
+//        }else{
+//            InterfazProfesor ia = new InterfazProfesor(this.nombreProfesor, this.serializa);
+//            this.setVisible(false);
+//            ia.setVisible(true); 
+//        }
+        dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

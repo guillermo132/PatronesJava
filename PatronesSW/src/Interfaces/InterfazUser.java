@@ -10,7 +10,9 @@ import Clases.Usuario;
 import Singleton.Serializa;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Observer;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,8 +24,10 @@ public class InterfazUser extends javax.swing.JFrame {
     /**
      * Creates new form InterfazUser
      */
-    Usuario c;
+    private Usuario c;
     private Serializa serializa;
+    private Observer obs;
+    
     public InterfazUser() {
         initComponents();
     }
@@ -173,13 +177,27 @@ public class InterfazUser extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-
+    private JFrame getFrame(){
+        return this;
+    }
+    
+    private Observer getObserver(){
+        return this.obs;
+    }
     private void jButtonListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListaActionPerformed
         // TODO add your handling code here:
         if(serializa.CargarTfg().isEmpty()){
             JOptionPane.showMessageDialog(this, "TODAVÍA NO HAY TFGS REGISTRADOS", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         }else{
-            InterfazVisualizarTfg lt = new InterfazVisualizarTfg(this.c, this.serializa);
+            InterfazVisualizarTfg lt = new InterfazVisualizarTfg(this.c, this.serializa){
+                @Override
+                public void dispose(){
+                    //Hacemos visible la principal
+                    getFrame().setVisible(true);
+                    //Cerramos
+                    super.dispose();
+                }
+            };
             this.setVisible(false);
             lt.setVisible(true);   
         }
@@ -188,14 +206,30 @@ public class InterfazUser extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-         InterfazProfesorFav pfav = new InterfazProfesorFav(this.c, this.serializa);
-         this.setVisible(false);
-         pfav.setVisible(true);   
+        InterfazProfesorFav pfav = new InterfazProfesorFav(this.c, this.serializa){
+            @Override
+            public void dispose(){
+                //Hacemos visible la principal
+                getFrame().setVisible(true);
+                //Cerramos
+                super.dispose();
+            }
+        };
+        this.setVisible(false);
+        pfav.setVisible(true);   
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButtonEleccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEleccionesActionPerformed
         // TODO add your handling code here:
-        InterfazElegirTfgAlumno etfg = new InterfazElegirTfgAlumno(this.c, this.serializa);
+        InterfazElegirTfgAlumno etfg = new InterfazElegirTfgAlumno(this.c, this.serializa){
+            @Override
+            public void dispose(){
+                //Hacemos visible la principal
+                getFrame().setVisible(true);
+                //Cerramos
+                super.dispose();
+            }
+        };
         this.setVisible(false);
         etfg.setVisible(true); 
     }//GEN-LAST:event_jButtonEleccionesActionPerformed
@@ -230,7 +264,15 @@ public class InterfazUser extends javax.swing.JFrame {
                     }
                 }
                 
-                InterfazVisualizarTfg lt = new InterfazVisualizarTfg(this.c, this.serializa, myTfg);
+                InterfazVisualizarTfg lt = new InterfazVisualizarTfg(this.c, this.serializa, myTfg){
+                    @Override
+                    public void dispose(){
+                        //Hacemos visible la principal
+                        getFrame().setVisible(true);
+                        //Cerramos
+                        super.dispose();
+                    }
+                };
                 this.setVisible(false);
                 lt.setVisible(true);  
             }else{

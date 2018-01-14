@@ -7,6 +7,7 @@ package Interfaces;
 
 import Clases.Usuario;
 import Singleton.Serializa;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -145,7 +146,15 @@ public class InterfazAdmin extends javax.swing.JFrame {
         if(serializa.CargarTfg().isEmpty()){
             JOptionPane.showMessageDialog(this, "TODAVÍA NO HAY TFGS REGISTRADOS", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         }else{
-            InterfazVisualizarTfg lt = new InterfazVisualizarTfg(user, serializa);
+            InterfazVisualizarTfg lt = new InterfazVisualizarTfg(this.user, this.serializa){
+                @Override
+                public void dispose(){
+                    //Hacemos visible la principal
+                    getFrame().setVisible(true);
+                    //Cerramos
+                    super.dispose();
+                }
+            };
             this.setVisible(false);
             lt.setVisible(true);   
         }
@@ -157,26 +166,46 @@ public class InterfazAdmin extends javax.swing.JFrame {
         this.setVisible(false);
         ip.setVisible(true);
     }//GEN-LAST:event_closeSessionActionPerformed
-
+    private JFrame getFrame(){
+        return this;
+    }
     private void AltaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AltaUsuarioActionPerformed
         // TODO add your handling code here:
-        InterfazRegistrar ir = new InterfazRegistrar(this.user, this.serializa);
-        this.setVisible(false);
+         InterfazRegistrar ir;
+        ir = new InterfazRegistrar(this.user, this.serializa){
+            @Override
+            public void dispose(){
+                //Hacemos visible la principal
+                getFrame().setVisible(true);
+                //Cerramos
+                super.dispose();
+            }
+        };
         ir.setVisible(true);
+        this.setVisible(false);
+        //dispose();
     }//GEN-LAST:event_AltaUsuarioActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        InterfazPrioridad ag = new InterfazPrioridad(this.user, this.serializa);
+        InterfazPrioridad ag = new InterfazPrioridad(this.user, this.serializa){
+            @Override
+            public void dispose(){
+                //Hacemos visible la principal
+                getFrame().setVisible(true);
+                //Cerramos
+                super.dispose();
+            }
+        };
         this.setVisible(false);
         ag.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        InterfazDetallesSistema ds = new InterfazDetallesSistema(this.user, this.serializa);
-        this.setVisible(false);
-        ds.setVisible(true);
+//        InterfazDetallesSistema ds = new InterfazDetallesSistema(this.user, this.serializa);
+//        this.setVisible(false);
+//        ds.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

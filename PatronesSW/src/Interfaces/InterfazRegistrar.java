@@ -69,9 +69,7 @@ public class InterfazRegistrar extends javax.swing.JFrame {
         if(!checkNif && !checkNameUser){
             serializa.GuardarCliente(correo, u);    
                 //Nos lleva a la ventana principal
-            InterfazAdmin ip = new InterfazAdmin(this.admin, this.serializa);
-            this.setVisible(false);
-            ip.setVisible(true);
+            dispose();
         }
     }
 
@@ -311,8 +309,7 @@ public class InterfazRegistrar extends javax.swing.JFrame {
             }
                 
                 
-                guardaUsuario(cl1, correo);
-                
+                guardaUsuario(cl1, correo);           
         }
     }//GEN-LAST:event_botonRegistrarActionPerformed
     private static boolean isValidDouble(String s) {
@@ -330,9 +327,10 @@ public class InterfazRegistrar extends javax.swing.JFrame {
     private void botonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtrasActionPerformed
         // TODO add your handling code here:
         //Nos lleva a la ventana principal
-        InterfazAdmin ip = new InterfazAdmin(this.admin, this.serializa);
-        this.setVisible(false);
-        ip.setVisible(true);
+//        InterfazAdmin ip = new InterfazAdmin(this.admin, this.serializa);
+//        this.setVisible(false);
+//        ip.setVisible(true);
+        dispose();
     }//GEN-LAST:event_botonAtrasActionPerformed
 
     private void checkProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkProfesorActionPerformed

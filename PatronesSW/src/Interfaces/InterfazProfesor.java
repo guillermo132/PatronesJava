@@ -10,6 +10,7 @@ import Clases.Usuario;
 import Singleton.Serializa;
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -150,15 +151,23 @@ public class InterfazProfesor extends javax.swing.JFrame {
     private void nameProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameProfesorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nameProfesorActionPerformed
-
+    private JFrame getFrame(){
+        return this;
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ArrayList<Tfg> listaTFG = new ArrayList<Tfg>();
-        listaTFG = serializa.CargarTfg();
-        if(listaTFG.isEmpty()){
+        if(serializa.CargarTfg().isEmpty()){
             JOptionPane.showMessageDialog(this, "TODAVÍA NO HAY TFGS REGISTRADOS", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         }else{
-            InterfazVisualizarTfg lt = new InterfazVisualizarTfg(this.u, this.serializa);
+            InterfazVisualizarTfg lt = new InterfazVisualizarTfg(this.u, this.serializa){
+                @Override
+                public void dispose(){
+                    //Hacemos visible la principal
+                    getFrame().setVisible(true);
+                    //Cerramos
+                    super.dispose();
+                }
+            };
             this.setVisible(false);
             lt.setVisible(true);   
         }
@@ -167,14 +176,30 @@ public class InterfazProfesor extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        InterfazRegistrarTfg ip = new InterfazRegistrarTfg(this.serializa,this.u);
+        InterfazRegistrarTfg ip = new InterfazRegistrarTfg(this.serializa,this.u){
+                @Override
+                public void dispose(){
+                    //Hacemos visible la principal
+                    getFrame().setVisible(true);
+                    //Cerramos
+                    super.dispose();
+                }
+        };
         this.setVisible(false);
         ip.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        InterfazAsignacionTfg ia = new InterfazAsignacionTfg(this.u, this.serializa);
+        InterfazAsignacionTfg ia = new InterfazAsignacionTfg(this.u, this.serializa){
+                @Override
+                public void dispose(){
+                    //Hacemos visible la principal
+                    getFrame().setVisible(true);
+                    //Cerramos
+                    super.dispose();
+                }
+            };
         this.setVisible(false);
         ia.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -188,7 +213,15 @@ public class InterfazProfesor extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        InterfazTfgOfertadosProfesor itop = new InterfazTfgOfertadosProfesor(this.u, this.serializa);
+        InterfazTfgOfertadosProfesor itop = new InterfazTfgOfertadosProfesor(this.u, this.serializa){
+                @Override
+                public void dispose(){
+                    //Hacemos visible la principal
+                    getFrame().setVisible(true);
+                    //Cerramos
+                    super.dispose();
+                }
+            };
         this.setVisible(false);
         itop.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed

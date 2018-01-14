@@ -261,9 +261,10 @@ public class InterfazPrioridad extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-            InterfazAdmin ia = new InterfazAdmin(this.admin, this.serializa);
-            this.setVisible(false);
-            ia.setVisible(true);
+//            InterfazAdmin ia = new InterfazAdmin(this.admin, this.serializa);
+//            this.setVisible(false);
+//            ia.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jList2ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList2ValueChanged

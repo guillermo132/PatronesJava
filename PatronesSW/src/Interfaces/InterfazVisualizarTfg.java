@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import Singleton.Serializa;
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import proxy.*;
@@ -53,7 +51,7 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
         this.tfg=tfg;
         jButton1.setVisible(false);
         jButton2.setVisible(false);
-        jButton4.setVisible(false);
+        //jButton4.setVisible(false);
         cargarDatosTfg(this.tfg);
     }
     
@@ -326,19 +324,20 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if(this.user.getProfesor()){
-            InterfazProfesor ip = new InterfazProfesor(this.user, this.serializa);
-            this.setVisible(false);
-            ip.setVisible(true); 
-        }else if(this.user.getNombreUsuario().equals("admin")){
-            InterfazAdmin ip = new InterfazAdmin(this.user, this.serializa);
-            this.setVisible(false);
-            ip.setVisible(true); 
-        }else{
-            InterfazUser ip = new InterfazUser(this.user, this.serializa);
-            this.setVisible(false);
-            ip.setVisible(true); 
-        }
+//        if(this.user.getProfesor()){
+//            InterfazProfesor ip = new InterfazProfesor(this.user, this.serializa);
+//            this.setVisible(false);
+//            ip.setVisible(true); 
+//        }else if(this.user.getNombreUsuario().equals("admin")){
+//            InterfazAdmin ip = new InterfazAdmin(this.user, this.serializa);
+//            this.setVisible(false);
+//            ip.setVisible(true); 
+//        }else{
+//            InterfazUser ip = new InterfazUser(this.user, this.serializa);
+//            this.setVisible(false);
+//            ip.setVisible(true); 
+//        }
+        dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

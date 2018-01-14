@@ -117,9 +117,10 @@ public class InterfazProfesorFav extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        InterfazUser ia = new InterfazUser(this.c, this.serializa);
-        ia.setVisible(true);
-        this.setVisible(false); 
+//        InterfazUser ia = new InterfazUser(this.c, this.serializa);
+//        ia.setVisible(true);
+//        this.setVisible(false); 
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -136,8 +137,7 @@ public class InterfazProfesorFav extends javax.swing.JFrame {
             }
         }
         Observer observer = new ObservadorConcreto(profesor,lt, profesorFav);
-        this.setVisible(false);
-        lt.setVisible(true); 
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -11,6 +11,7 @@ import Singleton.Serializa;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -120,19 +121,30 @@ public class InterfazTfgOfertadosProfesor extends javax.swing.JFrame {
                         tfgSeleccionado = listaTFG.get(x);
                     }
                 }
-            InterfazVisualizarTfg lt = new InterfazVisualizarTfg(this.nombreProfesor, this.serializa, tfgSeleccionado);
+            InterfazVisualizarTfg lt = new InterfazVisualizarTfg(this.nombreProfesor, this.serializa, tfgSeleccionado){
+                @Override
+                public void dispose(){
+                    //Hacemos visible la principal
+                    getFrame().setVisible(true);
+                    //Cerramos
+                    super.dispose();
+                }
+            };
             this.setVisible(false);
             lt.setVisible(true);
         }catch(Exception e){
             JOptionPane.showMessageDialog(this,"No hay TFG seleccionado."); 
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    private JFrame getFrame(){
+        return this;
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        InterfazProfesor ia = new InterfazProfesor(this.nombreProfesor, this.serializa);
-        this.setVisible(false);
-        ia.setVisible(true);
+//        InterfazProfesor ia = new InterfazProfesor(this.nombreProfesor, this.serializa);
+//        this.setVisible(false);
+//        ia.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     
