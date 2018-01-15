@@ -45,12 +45,11 @@ public class InterfazAutoasignación extends javax.swing.JFrame {
     public void autoAsignar(){
         this.listaTFG = serializa.CargarTfg();
         for(int i = 0; i<listaTFG.size();i++){
-            Usuario userElegido = getAlumnoSeleccionado(this.listaTFG.get(i));
-            if(userElegido != null){
-                this.asignar(userElegido, this.listaTFG.get(i));
-            }else{
-               this.listModel.addElement(this.listaTFG.get(i).getAlumnoAsignado()+"/t/t"+this.listaTFG.get(i)+"/t/t"); 
+            if(this.listaTFG.get(i).getAsignado()){
+                this.listModel.addElement(this.listaTFG.get(i).getAlumnoAsignado()+"/t/t"+this.listaTFG.get(i)+"/t/t"); 
             }
+            Usuario userElegido = getAlumnoSeleccionado(this.listaTFG.get(i));
+            this.asignar(userElegido, this.listaTFG.get(i));  
         }
         if(this.listModel.isEmpty()){
             System.out.println("VACIA");
