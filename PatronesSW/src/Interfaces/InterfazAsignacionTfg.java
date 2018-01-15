@@ -215,6 +215,7 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
                 if(choice == JOptionPane.YES_NO_OPTION){
                     usuarioSeleccionado.setAsignado(new EstadoNoAsignado().estado());
                     tfgSeleccionado.setAsignado(new EstadoNoAsignado().estado());
+                    tfgSeleccionado.borraAlumnoAsignado();
                     serializa.GuardarTfg(tfgSeleccionado);
                     serializa.GuardarCliente(key2, usuarioSeleccionado);
                     JOptionPane.showMessageDialog(this,"Ha sido desasignado el TFG "+tfgSeleccionado.getIdTfg()+" al alumno "+usuarioSeleccionado.getNombreUsuario()); 
