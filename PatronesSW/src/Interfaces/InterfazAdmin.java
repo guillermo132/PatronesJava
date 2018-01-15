@@ -214,9 +214,9 @@ public class InterfazAdmin extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-//        InterfazDetallesSistema ds = new InterfazDetallesSistema(this.user, this.serializa);
-//        this.setVisible(false);
-//        ds.setVisible(true);
+        InterfazDetallesSistema ds = new InterfazDetallesSistema(this.user, this.serializa);
+        this.setVisible(false);
+        ds.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
