@@ -9,6 +9,7 @@ import Clases.Usuario;
 import Singleton.Serializa;
 import java.util.*;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import observer.ObservadorConcreto;
 
 /**
@@ -125,19 +126,23 @@ public class InterfazProfesorFav extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String profesor = this.jList1.getSelectedValue();
-        InterfazUser lt = new InterfazUser(this.c, this.serializa);
-        Iterator it = listaUsuarios.keySet().iterator();
-        Usuario profesorFav = null;
-        while (it.hasNext()){
-            String key= (String) it.next();
-            Usuario ll = listaUsuarios.get(key);
-            if(ll.getNombreUsuario().equals(profesor)){
-                profesorFav = ll;
+        try{
+            String profesor = this.jList1.getSelectedValue();
+            InterfazUser lt = new InterfazUser(this.c, this.serializa);
+            Iterator it = listaUsuarios.keySet().iterator();
+            Usuario profesorFav = null;
+            while (it.hasNext()){
+                String key= (String) it.next();
+                Usuario ll = listaUsuarios.get(key);
+                if(ll.getNombreUsuario().equals(profesor)){
+                    profesorFav = ll;
+                }
             }
+            Observer observer = new ObservadorConcreto(profesor,lt, profesorFav);
+            dispose();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Selecciona un profesor."); 
         }
-        Observer observer = new ObservadorConcreto(profesor,lt, profesorFav);
-        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
