@@ -10,6 +10,11 @@ import Clases.Usuario;
 import Singleton.Serializa;
 import State.EstadoAsignado;
 import State.EstadoNoAsignado;
+import Strategy.Contexto;
+import Strategy.Estrategia;
+import Strategy.EstrategiaConcretaApellidos;
+import Strategy.EstrategiaConcretaNombre;
+import Strategy.EstrategiaConcretaNotaMedia;
 import java.util.*;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -56,6 +61,9 @@ public class InterfazPrioridad extends javax.swing.JFrame {
         jList1 = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,6 +103,17 @@ public class InterfazPrioridad extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jList2);
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nota Media", "Nombre", "Apellidos" }));
+
+        jLabel3.setText("Ordenar alumnos por:");
+
+        jButton4.setText("Ordenar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,35 +130,42 @@ public class InterfazPrioridad extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(403, 403, 403)
-                        .addComponent(jButton3)
-                        .addGap(23, 47, Short.MAX_VALUE))
+                        .addComponent(jButton3))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(68, 68, 68)
-                                .addComponent(jButton1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(jButton2)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jButton2)
+                            .addComponent(jButton1)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton4)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGap(6, 6, 6)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel1))
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
                         .addComponent(jButton1)
-                        .addGap(123, 123, 123)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(78, 78, 78)
                         .addComponent(jButton3)
                         .addGap(28, 28, 28))
                     .addGroup(layout.createSequentialGroup()
@@ -204,22 +230,22 @@ public class InterfazPrioridad extends javax.swing.JFrame {
         listaUsuarios = serializa.CargarClientes();
         Iterator it = listaUsuarios.keySet().iterator();
         Tfg tfg = listaTFG.get(this.jList2.getSelectedIndex());
-        ArrayList<Usuario> notaMedia = new ArrayList<Usuario>();
+        ArrayList<Usuario> listaAlumnos = new ArrayList<Usuario>();
         while (it.hasNext()){
             String key= (String) it.next();
             Usuario ll = listaUsuarios.get(key);
             if(ll.getProfesor()==false && tfg.getAlumno().contains(ll.getNombreUsuario())){
-                notaMedia.add(ll);
+                listaAlumnos.add(ll);
             }
         }
-        Collections.sort(notaMedia, new Comparator<Usuario>() {
+        Collections.sort(listaAlumnos, new Comparator<Usuario>() {
             @Override
             public int compare(Usuario c1, Usuario c2) {
                 return Double.compare(c2.getNotaMedia(), c1.getNotaMedia());
             }
         });
-        for(int i=0; i<notaMedia.size();i++){
-            listModel.addElement(notaMedia.get(i).getNombreUsuario() + " -> " + notaMedia.get(i).getNotaMedia());
+        for(int i=0; i<listaAlumnos.size();i++){
+            listModel.addElement(listaAlumnos.get(i).getNombreUsuario() + " -> " + listaAlumnos.get(i).getNotaMedia());
         }
         jList1.setModel(listModel);
     }
@@ -270,6 +296,42 @@ public class InterfazPrioridad extends javax.swing.JFrame {
         cargarListaAlumnos(this.jList2.getSelectedValue());
     }//GEN-LAST:event_jList2ValueChanged
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        DefaultListModel listModel = new DefaultListModel();
+        
+        listaUsuarios = serializa.CargarClientes();
+        Iterator it = listaUsuarios.keySet().iterator();
+        Tfg tfg = listaTFG.get(this.jList2.getSelectedIndex());
+        ArrayList<Usuario> listaAlumnos = new ArrayList<Usuario>();
+        while (it.hasNext()){
+            String key= (String) it.next();
+            Usuario ll = listaUsuarios.get(key);
+            if(ll.getProfesor()==false && tfg.getAlumno().contains(ll.getNombreUsuario())){
+                listaAlumnos.add(ll);
+            }
+        }
+        Estrategia est = new EstrategiaConcretaNombre();
+        Contexto contexto = new Contexto(est, listaAlumnos);
+        
+        if(this.jComboBox1.getSelectedItem().equals("Nombre")){
+            listaAlumnos = contexto.ejecutaEstrategia();
+        }else if(this.jComboBox1.getSelectedItem().equals("Apellidos")){
+            est = new EstrategiaConcretaApellidos();
+            contexto.setEstrategia(est);
+            listaAlumnos = contexto.ejecutaEstrategia();
+        }else{
+            est = new EstrategiaConcretaNotaMedia();
+            contexto.setEstrategia(est);
+            listaAlumnos = contexto.ejecutaEstrategia();
+        }
+        
+        for(int i=0; i<listaAlumnos.size();i++){
+            listModel.addElement(listaAlumnos.get(i).getNombreUsuario() + " -> " + listaAlumnos.get(i).getNotaMedia());
+        }
+        jList1.setModel(listModel);        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -310,8 +372,11 @@ public class InterfazPrioridad extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane1;
