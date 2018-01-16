@@ -47,14 +47,13 @@ public class InterfazAutoasignación extends javax.swing.JFrame {
         this.listaTFG = serializa.CargarTfg();
         for(int i = 0; i<listaTFG.size();i++){
             if(this.listaTFG.get(i).getAsignado()){
-                this.listModel.addElement(this.listaTFG.get(i).getAlumnoAsignado()+"\t\t"+this.listaTFG.get(i).getTitulo()+"\t\t");
-            }
-            Usuario userElegido = getAlumnoSeleccionado(this.listaTFG.get(i));
-            this.asignar(userElegido, this.listaTFG.get(i));
+                this.listModel.addElement(this.listaTFG.get(i).getAlumnoAsignado()+"            "+this.listaTFG.get(i).getTitulo()+"      ");
+            }else{
+                Usuario userElegido = getAlumnoSeleccionado(this.listaTFG.get(i));
+                this.asignar(userElegido, this.listaTFG.get(i));
+            }  
         }
-        if(this.listModel.isEmpty()){
-            System.out.println("VACIA");
-        }else{
+        if(!this.listModel.isEmpty()){
             try{
                 jListInfo.setModel(this.listModel);
             }catch(Exception e){
@@ -68,7 +67,7 @@ public class InterfazAutoasignación extends javax.swing.JFrame {
         user.setAsignado(new EstadoAsignado().estado());
         tfg.setAsignado(new EstadoAsignado().estado());
         tfg.setAlumnoAsignado(user.getNombreUsuario());
-        this.listModel.addElement(user.getNombreUsuario()+"\t\t"+tfg.getTitulo()+"\t\t"+user.getNotaMedia());
+        this.listModel.addElement(user.getNombreUsuario()+"                  "+tfg.getTitulo()+"                 "+user.getNotaMedia());
         serializa.GuardarTfg(tfg);
         serializa.GuardarCliente(user.getNombreUsuario(), user);
     }

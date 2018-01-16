@@ -189,7 +189,7 @@ public class InterfazPrioridad extends javax.swing.JFrame {
                     tfgSeleccionado = listaTFG.get(x);
                 }
             }
-            Usuario usuarioSeleccionado = listaUsuarios.get(key2);
+            Usuario usuarioSeleccionado = listaUsuarios.get(key2.split(" ")[0]);
 
             if(usuarioSeleccionado.getAsignado()==false && tfgSeleccionado.getAsignado()==false){
                 int choice =JOptionPane.showOptionDialog (this,"Desea asignar el TFG "+tfgSeleccionado.getIdTfg()+" al alumno "+usuarioSeleccionado.getNombreUsuario()+"?", "¿Asignar?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
@@ -251,7 +251,7 @@ public class InterfazPrioridad extends javax.swing.JFrame {
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        try{
+        //try{
             String key1 = jList2.getSelectedValue();//Titulo Tfg
             String key2 = jList1.getSelectedValue();//nombreUsuario
             Tfg tfgSeleccionado = null;
@@ -260,8 +260,7 @@ public class InterfazPrioridad extends javax.swing.JFrame {
                     tfgSeleccionado = listaTFG.get(x);
                 }
             }
-            Usuario usuarioSeleccionado = listaUsuarios.get(key2);
-
+            Usuario usuarioSeleccionado = listaUsuarios.get(key2.split(" ")[0]);
             if(usuarioSeleccionado.getAsignado()==true && tfgSeleccionado.getAsignado()==true){
 
                 int choice =JOptionPane.showOptionDialog (this,"Desea desasignar el TFG "+tfgSeleccionado.getIdTfg()+" al alumno "+usuarioSeleccionado.getNombreUsuario()+"?", "¿Desasignar?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
@@ -274,13 +273,13 @@ public class InterfazPrioridad extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this,"Ha sido desasignado el TFG "+tfgSeleccionado.getIdTfg()+" al alumno "+usuarioSeleccionado.getNombreUsuario());
                 }
             }else{
-                JOptionPane.showMessageDialog(this,"El alumno / TFG ya han sido previamente asignados!");
+                JOptionPane.showMessageDialog(this,"¡El alumno no tiene asignado ese TFG o ningún otro!", "¡Atención!", JOptionPane.ERROR_MESSAGE);
             }
 
-        }
+       /* }
         catch(Exception e){
             JOptionPane.showMessageDialog(this,"Selecciona un tfg y un alumno para realizar la asignación.");
-        }
+        }*/
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -293,6 +292,7 @@ public class InterfazPrioridad extends javax.swing.JFrame {
 
     private void jList2ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList2ValueChanged
         // TODO add your handling code here:
+        this.jList1.removeAll();
         cargarListaAlumnos(this.jList2.getSelectedValue());
     }//GEN-LAST:event_jList2ValueChanged
 

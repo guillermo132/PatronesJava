@@ -95,7 +95,9 @@ public class Tfg implements Serializable{
         this.alumnoAsignado=alumnoAsignado;
     }
     public void setAlumnno(String user){
-        this.listaPeticiones.add(user);
+        if(!this.listaPeticiones.contains(user)){
+            this.listaPeticiones.add(user);
+        }
     }
     public ArrayList<String> getAlumno(){
         return this.listaPeticiones;

@@ -209,19 +209,18 @@ public class InterfazAsignacionTfg extends javax.swing.JFrame {
             }
             Usuario usuarioSeleccionado = listaUsuarios.get(key2);
             
-            if(usuarioSeleccionado.getAsignado()==true && tfgSeleccionado.getAsignado()==true){
-            
-                int choice =JOptionPane.showOptionDialog (this,"Desea desasignar el TFG "+tfgSeleccionado.getIdTfg()+" al alumno "+usuarioSeleccionado.getNombreUsuario()+"?", "¿Desasignar?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-                if(choice == JOptionPane.YES_NO_OPTION){
-                    usuarioSeleccionado.setAsignado(new EstadoNoAsignado().estado());
-                    tfgSeleccionado.setAsignado(new EstadoNoAsignado().estado());
-                    tfgSeleccionado.borraAlumnoAsignado();
-                    serializa.GuardarTfg(tfgSeleccionado);
-                    serializa.GuardarCliente(key2, usuarioSeleccionado);
-                    JOptionPane.showMessageDialog(this,"Ha sido desasignado el TFG "+tfgSeleccionado.getIdTfg()+" al alumno "+usuarioSeleccionado.getNombreUsuario()); 
-                }
+            if(usuarioSeleccionado.getAsignado()==true && tfgSeleccionado.getAsignado()==true ){
+                    int choice =JOptionPane.showOptionDialog (this,"Desea desasignar el TFG "+tfgSeleccionado.getIdTfg()+" al alumno "+usuarioSeleccionado.getNombreUsuario()+"?", "¿Desasignar?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                    if(choice == JOptionPane.YES_NO_OPTION){
+                        usuarioSeleccionado.setAsignado(new EstadoNoAsignado().estado());
+                        tfgSeleccionado.setAsignado(new EstadoNoAsignado().estado());
+                        tfgSeleccionado.borraAlumnoAsignado();
+                        serializa.GuardarTfg(tfgSeleccionado);
+                        serializa.GuardarCliente(key2, usuarioSeleccionado);
+                        JOptionPane.showMessageDialog(this,"Ha sido desasignado el TFG "+tfgSeleccionado.getIdTfg()+" al alumno "+usuarioSeleccionado.getNombreUsuario()); 
+                    }
             }else{
-               JOptionPane.showMessageDialog(this,"El alumno / TFG ya han sido previamente asignados!"); 
+               JOptionPane.showMessageDialog(this,"¡El alumno no tiene asignado este TFG!","¡Atención!", JOptionPane.ERROR_MESSAGE);  
             }
             
             

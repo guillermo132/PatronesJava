@@ -77,7 +77,7 @@ public class InterfazVisualizarTfg extends javax.swing.JFrame {
     private void inicializarDatos(int numtfg){
         this.tfgActual = this.tfgs.get(numtfg);
         this.textoTfg.setText(this.tfgActual.getIdTfg());
-        this.textoTitulo.setText(this.tfgActual.getIdTfg());
+        this.textoTitulo.setText(this.tfgActual.getTitulo());
         this.textoDpto.setText(this.tfgActual.getDepartamento());
         this.textoAlumnoAsignado.setText(this.tfgActual.getAlumnoAsignado());
         this.textoDescripcion.setText(this.tfgActual.getDescripcion());
