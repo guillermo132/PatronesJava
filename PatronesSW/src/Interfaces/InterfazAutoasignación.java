@@ -49,8 +49,13 @@ public class InterfazAutoasignación extends javax.swing.JFrame {
             if(this.listaTFG.get(i).getAsignado()){
                 this.listModel.addElement(this.listaTFG.get(i).getAlumnoAsignado()+"            "+this.listaTFG.get(i).getTitulo()+"      ");
             }else{
-                Usuario userElegido = getAlumnoSeleccionado(this.listaTFG.get(i));
-                this.asignar(userElegido, this.listaTFG.get(i));
+                if(!this.listaTFG.get(i).getAlumno().isEmpty()){
+                  Usuario userElegido = getAlumnoSeleccionado(this.listaTFG.get(i));
+                  if(!userElegido.getAsignado()){
+                     this.asignar(userElegido, this.listaTFG.get(i));  
+                  }
+                   
+                }
             }  
         }
         if(!this.listModel.isEmpty()){
@@ -71,6 +76,7 @@ public class InterfazAutoasignación extends javax.swing.JFrame {
         serializa.GuardarTfg(tfg);
         serializa.GuardarCliente(user.getNombreUsuario(), user);
     }
+
     public Usuario getAlumnoSeleccionado(Tfg tfgAsignar){
         if(tfgAsignar.getAlumno().isEmpty()){
             return null;
