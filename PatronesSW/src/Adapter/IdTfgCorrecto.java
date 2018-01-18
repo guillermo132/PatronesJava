@@ -31,13 +31,11 @@ public class IdTfgCorrecto implements IdTfg{
             cadenaNueva = idTfgAntiguo;
         }
         
-        if(idTfgAntiguo.length()<9){
             
-            cadenaNueva = String.format("%1$-9s",cadenaNueva);
-            cadenaNueva = cadenaNueva.replace(" ", "0");
-            //System.out.println("Cadena: "+ cadenaNueva);
+        cadenaNueva = String.format("%1$-9s",cadenaNueva);
+        cadenaNueva = cadenaNueva.replace(" ", "0");
+        //System.out.println("Cadena: "+ cadenaNueva);
            
-        }
         
         String idTfgMitad1 = cadenaNueva.substring(0, 7);
         String idTfgMitad2 = cadenaNueva.substring(7, 9);

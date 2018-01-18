@@ -251,7 +251,7 @@ public class InterfazPrioridad extends javax.swing.JFrame {
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        //try{
+        try{
             String key1 = jList2.getSelectedValue();//Titulo Tfg
             String key2 = jList1.getSelectedValue();//nombreUsuario
             Tfg tfgSeleccionado = null;
@@ -276,10 +276,10 @@ public class InterfazPrioridad extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,"¡El alumno no tiene asignado ese TFG o ningún otro!", "¡Atención!", JOptionPane.ERROR_MESSAGE);
             }
 
-       /* }
+        }
         catch(Exception e){
-            JOptionPane.showMessageDialog(this,"Selecciona un tfg y un alumno para realizar la asignación.");
-        }*/
+            JOptionPane.showMessageDialog(this,"Selecciona un tfg y un alumno para realizar la desasignación.");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -298,38 +298,42 @@ public class InterfazPrioridad extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        DefaultListModel listModel = new DefaultListModel();
-        
-        listaUsuarios = serializa.CargarClientes();
-        Iterator it = listaUsuarios.keySet().iterator();
-        Tfg tfg = listaTFG.get(this.jList2.getSelectedIndex());
-        ArrayList<Usuario> listaAlumnos = new ArrayList<Usuario>();
-        while (it.hasNext()){
-            String key= (String) it.next();
-            Usuario ll = listaUsuarios.get(key);
-            if(ll.getProfesor()==false && tfg.getAlumno().contains(ll.getNombreUsuario())){
-                listaAlumnos.add(ll);
+        try{
+            DefaultListModel listModel = new DefaultListModel();
+
+            listaUsuarios = serializa.CargarClientes();
+            Iterator it = listaUsuarios.keySet().iterator();
+            Tfg tfg = listaTFG.get(this.jList2.getSelectedIndex());
+            ArrayList<Usuario> listaAlumnos = new ArrayList<Usuario>();
+            while (it.hasNext()){
+                String key= (String) it.next();
+                Usuario ll = listaUsuarios.get(key);
+                if(ll.getProfesor()==false && tfg.getAlumno().contains(ll.getNombreUsuario())){
+                    listaAlumnos.add(ll);
+                }
             }
+            Estrategia est = new EstrategiaConcretaNombre();
+            Contexto contexto = new Contexto(est, listaAlumnos);
+
+            if(this.jComboBox1.getSelectedItem().equals("Nombre")){
+                listaAlumnos = contexto.ejecutaEstrategia();
+            }else if(this.jComboBox1.getSelectedItem().equals("Apellidos")){
+                est = new EstrategiaConcretaApellidos();
+                contexto.setEstrategia(est);
+                listaAlumnos = contexto.ejecutaEstrategia();
+            }else{
+                est = new EstrategiaConcretaNotaMedia();
+                contexto.setEstrategia(est);
+                listaAlumnos = contexto.ejecutaEstrategia();
+            }
+
+            for(int i=0; i<listaAlumnos.size();i++){
+                listModel.addElement(listaAlumnos.get(i).getNombreUsuario() + " -> " + listaAlumnos.get(i).getNotaMedia());
+            }
+            jList1.setModel(listModel); 
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Selecciona un TFG de la lista que tenga alumnos que lo hayan elegido!");
         }
-        Estrategia est = new EstrategiaConcretaNombre();
-        Contexto contexto = new Contexto(est, listaAlumnos);
-        
-        if(this.jComboBox1.getSelectedItem().equals("Nombre")){
-            listaAlumnos = contexto.ejecutaEstrategia();
-        }else if(this.jComboBox1.getSelectedItem().equals("Apellidos")){
-            est = new EstrategiaConcretaApellidos();
-            contexto.setEstrategia(est);
-            listaAlumnos = contexto.ejecutaEstrategia();
-        }else{
-            est = new EstrategiaConcretaNotaMedia();
-            contexto.setEstrategia(est);
-            listaAlumnos = contexto.ejecutaEstrategia();
-        }
-        
-        for(int i=0; i<listaAlumnos.size();i++){
-            listModel.addElement(listaAlumnos.get(i).getNombreUsuario() + " -> " + listaAlumnos.get(i).getNotaMedia());
-        }
-        jList1.setModel(listModel);        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

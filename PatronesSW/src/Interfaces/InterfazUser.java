@@ -41,6 +41,7 @@ public class InterfazUser extends javax.swing.JFrame {
        if(c.getInvitado()){
            this.jButtonAsignados.setEnabled(false);
            this.jButtonElecciones.setEnabled(false);
+           this.jButton4.setEnabled(false);
        }
   }
 
@@ -254,12 +255,9 @@ public class InterfazUser extends javax.swing.JFrame {
                 Tfg myTfg = null;
                 ArrayList<Tfg> listaTFG = serializa.CargarTfg();
                 Iterator<Tfg> it = listaTFG.iterator();
-                System.out.println("While");
                 while (it.hasNext()){
                     Tfg key= it.next();
-                    System.out.println(key.getTitulo()+" - "+key.getAlumnoAsignado());
                     if(key.getAlumnoAsignado().equals(this.c.getNombreUsuario())){
-                        System.out.println(key.getAlumnoAsignado());
                         myTfg = key;
                     }
                 }
